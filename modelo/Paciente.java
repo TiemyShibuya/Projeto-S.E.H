@@ -1,6 +1,10 @@
 package modelo;
 
-public class Paciente {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Paciente extends Pessoa{
     protected int codigoPaciente;
     protected int emergencia;
     
@@ -18,5 +22,8 @@ public class Paciente {
     public int getEmergencia(){
         return emergencia;
     }
-    
+
+    public void Fila_de_Prioridade(String nome){
+
+    }
 }

@@ -1,5 +1,5 @@
 
-package praticagit;
+package modelo;
 
 public class Enfermeira extends Funcionario {
     protected int codigoEnf;

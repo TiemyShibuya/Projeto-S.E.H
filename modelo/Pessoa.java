@@ -1,14 +1,13 @@
-/* Aula prática
- * Tiemy Shibuya Watanabe 5214
- */
 package modelo;
+
 import java.util.Date;
 
 public class Pessoa {
     //Variáveis
     protected String nome;
     protected String cpf;
-    protected Date data_de_nascimento;
+    protected String sexo;
+    protected String data_de_nascimento;
     protected int idade;
     protected String telefone;
     protected String endereco;
@@ -21,16 +20,23 @@ public class Pessoa {
         this.nome = nome;
 
     }
+    public String getSexo(){
+        return sexo;
+    }
+    public void setSexo(String sexo){
+        this.sexo = sexo;
+
+    }
     public String getCPF(){
         return cpf;
     }
     public void setCPF(String cpf){
         this.cpf = cpf;
     }
-    public Date getData_de_nascimento(){
+    public String getData_de_nascimento(){
         return data_de_nascimento;
     }
-    public void setData_de_nascimento(Date data_de_nascimento){
+    public void setData_de_nascimento(String data_de_nascimento){
         this.data_de_nascimento = data_de_nascimento;
     }
     public int getIdade(){
@@ -57,7 +63,7 @@ public class Pessoa {
     public Pessoa(){
         System.out.println("Objeto pessoa criado");
     }
-    public Pessoa(String Nome,String Cpf,Date data,int Idade,String Telefone,String Endereco){
+    public Pessoa(String Nome,String Cpf,String data,int Idade,String Telefone,String Endereco){
         nome = Nome;
         cpf = Cpf;
         data_de_nascimento = data;

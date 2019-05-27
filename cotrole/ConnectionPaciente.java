@@ -3,6 +3,7 @@ package cotrole;
 import modelo.Paciente;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +15,7 @@ public class ConnectionPaciente {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
+    //Inserindo os dados
     public boolean Insert(Paciente p,int cod){
         String query = "insert into Paciente(codigoPaciente,Emergencia) values(?,?)";
         connection.Connect();
@@ -32,6 +34,7 @@ public class ConnectionPaciente {
         }
     }
     
+    //Atualizando os dados
     public boolean update(Paciente p,int cod){
         String query="update Paciente set codigoPaciente=?,emergencia=?, where cod_paciente=?";
         connection.Connect();
@@ -51,12 +54,13 @@ public class ConnectionPaciente {
         }
     }
     
+    //Deletando os dados
     public boolean Delete(Paciente p,int cod){
         String query = "delete from Paciente where cod_paciente";
         connection.Connect();
         try{
             pst = connection.conn.prepareStatement(query);
-            pst.setString(1,cod);
+            pst.setInt(1,cod);
             pst.execute();
             return true;
         }catch(SQLException e) {

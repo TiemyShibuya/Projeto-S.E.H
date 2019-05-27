@@ -4,6 +4,7 @@ import modelo.Pessoa;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ public class ConnectionPessoa {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
+    //Inserindo os dados
     public boolean Insert(Pessoa p,String cpf){
         String query = "insert into Pessoa(cpf,nome,sexo,idade,DataNasc,telefone,endereco) values(?,?,?,?,?,?)";
         connection.Connect();
@@ -25,8 +27,8 @@ public class ConnectionPessoa {
             pst.setString(2,p.getNome());
             pst.setString(3,p.getSexo());
             pst.setInt(4,p.getIdade());
-            pst.setDate(5,p.getData_de_nascimento());
-            pst.setInt(6,p.getTelefone());
+            pst.setString(5,p.getData_de_nascimento());
+            pst.setString(6,p.getTelefone());
             pst.setString(7,p.getEndereco());
             
             pst.execute();
@@ -37,6 +39,7 @@ public class ConnectionPessoa {
         }
     }
     
+    //Atualiza os dados
     public boolean update(Pessoa p,String cpf){
         String query="update Pessoa set cpf=?,nome=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=? where cpf_pessoa=?";
         connection.Connect();
@@ -47,8 +50,8 @@ public class ConnectionPessoa {
             pst.setString(2,p.getNome());
             pst.setString(3,p.getSexo());
             pst.setInt(4,p.getIdade());
-            pst.setDate(5,p.getData_de_nascimento());
-            pst.setInt(6,p.getTelefone());
+            pst.setString(5,p.getData_de_nascimento());
+            pst.setString(6,p.getTelefone());
             pst.setString(7,p.getEndereco());
             pst.setString(8,cpf);
             
@@ -61,6 +64,7 @@ public class ConnectionPessoa {
         }
     }
     
+    //Deleta os dados
     public boolean Delete(Pessoa p,String cpf){
         String query = "delete from Pessoa where cpf_pessoa=?";
         connection.Connect();

@@ -4,6 +4,7 @@ import modelo.Medico;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ public class ConnectionMedico {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
+    //Inserindo os dados
     public boolean Insert(Medico m,int cod){
         String query = "insert into Medico(Especialidade,codigomedico) values(?,?)";
         connection.Connect();
@@ -23,7 +25,7 @@ public class ConnectionMedico {
             pst = connection.conn.prepareStatement(query);
             
             pst.setString(1,m.getEspecialidade());
-            pst.setInt(2,m.getCodigomedico());
+            pst.setInt(2,m.getCodigoMedico());
 
             pst.execute();
             return true; 
@@ -33,6 +35,7 @@ public class ConnectionMedico {
         }
     }
     
+    //Atualizando os dados
     public boolean update(Medico m,int cod){
         String query="update Medico set especialidade=?,codigoMedico=?, where cod_Medico=?";
         connection.Connect();
@@ -52,6 +55,7 @@ public class ConnectionMedico {
         }
     }
     
+    //Deletando os dados
     public boolean Delete(Medico m,int cod){
         String query = "delete from Medico where cod_Medico";
         connection.Connect();

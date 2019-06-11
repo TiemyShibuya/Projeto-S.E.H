@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visão;
+package view;
+
+import view.TelaFormMedico;
 
 /**
  *
@@ -56,7 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanelInternal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanelInternal.setLayout(null);
 
-        jButtonCadMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/download.png"))); // NOI18N
+        jButtonCadMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medico.png"))); // NOI18N
         jButtonCadMed.setToolTipText("Médicos");
         jButtonCadMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,9 +66,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelInternal.add(jButtonCadMed);
-        jButtonCadMed.setBounds(10, 40, 90, 100);
+        jButtonCadMed.setBounds(10, 40, 60, 60);
 
-        jButtoncadPac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pac.jpg"))); // NOI18N
+        jButtoncadPac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
         jButtoncadPac.setToolTipText("Pacientes");
         jButtoncadPac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,9 +76,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelInternal.add(jButtoncadPac);
-        jButtoncadPac.setBounds(230, 40, 90, 100);
+        jButtoncadPac.setBounds(180, 40, 70, 60);
 
-        jButtoncadEnf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enf.jpg"))); // NOI18N
+        jButtoncadEnf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enfermeira.png"))); // NOI18N
         jButtoncadEnf.setToolTipText("Enfermeiras");
         jButtoncadEnf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +86,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelInternal.add(jButtoncadEnf);
-        jButtoncadEnf.setBounds(120, 40, 90, 100);
+        jButtoncadEnf.setBounds(90, 40, 70, 60);
 
         jLabelCadastro.setText("Cadastro");
         jPanelInternal.add(jLabelCadastro);
@@ -102,7 +104,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jInternalFrameBemvindo.getContentPane().add(jLabelSistemade);
         jLabelSistemade.setBounds(10, 10, 240, 22);
 
-        jButtonfecharBemvindo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x.png"))); // NOI18N
+        jButtonfecharBemvindo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fechar.png"))); // NOI18N
         jButtonfecharBemvindo.setToolTipText("Fechar tela bem-vindo");
         jButtonfecharBemvindo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,14 +112,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jInternalFrameBemvindo.getContentPane().add(jButtonfecharBemvindo);
-        jButtonfecharBemvindo.setBounds(500, 0, 80, 20);
+        jButtonfecharBemvindo.setBounds(530, 0, 40, 40);
 
         getContentPane().add(jInternalFrameBemvindo);
         jInternalFrameBemvindo.setBounds(0, 80, 600, 330);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 600, 410);
+        jLabel1.setBounds(0, -40, 600, 410);
 
         jMenu1.setText("Perfil");
         jMenuBar1.add(jMenu1);

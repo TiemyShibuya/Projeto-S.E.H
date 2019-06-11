@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visão;
+package view;
 import javax.swing.*;
 
 /**
@@ -28,17 +28,29 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelUser = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jButtonSair = new javax.swing.JButton();
-        jButtonAcessar = new javax.swing.JButton();
         jTextFieldUsuario = new javax.swing.JTextField();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jLabelSenha = new javax.swing.JLabel();
         jLabelUsuário = new javax.swing.JLabel();
         jLabelFundo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jLabelUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.png"))); // NOI18N
+        getContentPane().add(jLabelUser);
+        jLabelUser.setBounds(340, 60, 96, 80);
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/selecionar.png"))); // NOI18N
+        jToggleButton1.setText("Acessar");
+        getContentPane().add(jToggleButton1);
+        jToggleButton1.setBounds(280, 290, 91, 25);
+
+        jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,16 +58,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonSair);
-        jButtonSair.setBounds(320, 200, 90, 23);
-
-        jButtonAcessar.setText("Acessar");
-        jButtonAcessar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAcessarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonAcessar);
-        jButtonAcessar.setBounds(211, 200, 90, 23);
+        jButtonSair.setBounds(410, 290, 90, 25);
 
         jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +66,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldUsuario);
-        jTextFieldUsuario.setBounds(240, 90, 110, 30);
+        jTextFieldUsuario.setBounds(310, 160, 160, 30);
 
         jPasswordFieldSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,34 +74,27 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordFieldSenha);
-        jPasswordFieldSenha.setBounds(240, 140, 110, 30);
+        jPasswordFieldSenha.setBounds(310, 210, 160, 30);
 
         jLabelSenha.setText("Senha:");
         getContentPane().add(jLabelSenha);
-        jLabelSenha.setBounds(170, 140, 50, 14);
+        jLabelSenha.setBounds(260, 220, 50, 14);
 
         jLabelUsuário.setText("Usuário:");
         getContentPane().add(jLabelUsuário);
-        jLabelUsuário.setBounds(170, 90, 60, 40);
+        jLabelUsuário.setBounds(260, 160, 60, 40);
 
-        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo.jpg"))); // NOI18N
+        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo6.png"))); // NOI18N
         getContentPane().add(jLabelFundo);
-        jLabelFundo.setBounds(-10, 0, 480, 310);
+        jLabelFundo.setBounds(0, 0, 390, 370);
 
-        setSize(new java.awt.Dimension(486, 349));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo6.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(370, 0, 150, 370);
+
+        setSize(new java.awt.Dimension(533, 406));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessarActionPerformed
-        if(jTextFieldUsuario.getText().equals("admin")&& jPasswordFieldSenha.getText().equals("1234")){
-        TelaPrincipal tela = new TelaPrincipal();
-        tela.setVisible(true);
-        dispose();
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Senha ou usuário inválido");
-        }
-        
-    }//GEN-LAST:event_jButtonAcessarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
@@ -146,12 +142,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAcessar;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JLabel jLabelUser;
     private javax.swing.JLabel jLabelUsuário;
     private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JTextField jTextFieldUsuario;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

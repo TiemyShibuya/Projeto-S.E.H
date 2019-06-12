@@ -1,22 +1,81 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 import javax.swing.*;
-
+import control.conexaoBD;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author Tiemy Shibuya
  */
 public class Login extends javax.swing.JFrame {
+    /*Utilizado para fazer o controle do banco*/
+    /*rs manda as informações para o banco*/
+    ResultSet rs = null;
+    /*pst pega os dados da tela*/
+    PreparedStatement pst = null;
+    /*instanciando o banco*/
+    conexaoBD con = new conexaoBD();
+    
+    int permissao;
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
+        
+    }
+    
+    private void login(){
+        /*o que estou passando para o banco*/
+        String query = "select * from funcionario where usuario=? and senha=?";
+        try{
+            pst = con.conn.prepareStatement(query);
+            pst.setString(1, jTextFieldUsuario.getText());
+            pst.setString(2, jPasswordFieldSenha.getText());
+      
+            rs = pst.executeQuery();/*mandei p o banco as informações*/
+            /*esperando a resposta*/
+            if(rs.next()){
+                permissao = rs.getInt("permissao");
+                //System.out.println(permissao);
+                /*se o usuário n existir no banco fecha a conexão com o banco p ele poder tentar de novo*/
+                try{
+                    pst.close();
+                    rs.close();
+                    con.Disconnect();
+                }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null,"Falha na conexão","Falha",JOptionPane.ERROR_MESSAGE);                    
+                }
+                /*o usuário existe no banco*/
+                JOptionPane.showMessageDialog(null,"Bem vindo(a) : "+ jTextFieldUsuario.getText(),"Acessou",JOptionPane.INFORMATION_MESSAGE);
+                switch (permissao) {
+                    case 1:
+                        new TelaAdministrador(jTextFieldUsuario.getText()).setVisible(true);
+                        this.dispose();
+                        break;
+                    case 2:
+                        new TelaMedico(jTextFieldUsuario.getText()).setVisible(true);
+                        this.dispose();
+                        break;
+                    case 3:
+                        new TelaEnfermeira(jTextFieldUsuario.getText()).setVisible(true); 
+                        this.dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null,"Você não tem permissão","Erro",JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                
+                
+            }else if(jTextFieldUsuario.getText().isEmpty() && jPasswordFieldSenha.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Usuário e senha em branco","erro",JOptionPane.ERROR_MESSAGE);
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"Usuário e senha incorretos","erro",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Falha na conexão","Falha",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -47,8 +106,13 @@ public class Login extends javax.swing.JFrame {
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/selecionar.png"))); // NOI18N
         jToggleButton1.setText("Acessar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(280, 290, 91, 25);
+        jToggleButton1.setBounds(271, 290, 100, 25);
 
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButtonSair.setText("Sair");
@@ -107,6 +171,14 @@ public class Login extends javax.swing.JFrame {
     private void jPasswordFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if(con.status()==false){
+            JOptionPane.showMessageDialog(null,"banco de dados não conectado","Erro",JOptionPane.ERROR_MESSAGE);
+        }else{
+            login();
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,21 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
+
+import control.conexaoBD;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Tiemy Shibuya
  */
 public class TelaAdministrador extends javax.swing.JFrame {
+    conexaoBD con = new conexaoBD();
 
     /**
      * Creates new form TelaAdministrador
+     * @param usuario
      */
-    public TelaAdministrador() {
+    public TelaAdministrador(String usuario) {
         initComponents();
+        jLabelNomeAdmin.setText(usuario);
     }
 
     /**
@@ -29,25 +30,25 @@ public class TelaAdministrador extends javax.swing.JFrame {
 
         jLabelAdministrador = new javax.swing.JLabel();
         jButtonSair = new javax.swing.JButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButtonPerfil = new javax.swing.JToggleButton();
         jToggleButtonAjuda = new javax.swing.JToggleButton();
         jButtonMensagem = new javax.swing.JButton();
-        jLabelNomeAdmin = new javax.swing.JLabel();
-        jLabelFotoAdmin = new javax.swing.JLabel();
         jButtonMedico = new javax.swing.JButton();
         jButtonEnfermeira = new javax.swing.JButton();
         jButtonPaciente = new javax.swing.JButton();
         jButtonRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jTableNome = new javax.swing.JTable();
+        jFormattedTextFieldNome = new javax.swing.JFormattedTextField();
+        jToggleButtonPesquisar = new javax.swing.JToggleButton();
+        jLabelCadastrar = new javax.swing.JLabel();
+        jLabelPesquisar = new javax.swing.JLabel();
+        jLabelPacientes = new javax.swing.JLabel();
+        jLabelRelatorio = new javax.swing.JLabel();
+        jPanelFundoLateral = new javax.swing.JPanel();
+        jLabelNomeAdmin = new javax.swing.JLabel();
+        jLabelFotoAdmin = new javax.swing.JLabel();
+        jPanelFundoSuperior = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -71,31 +72,36 @@ public class TelaAdministrador extends javax.swing.JFrame {
         getContentPane().add(jButtonSair);
         jButtonSair.setBounds(10, 540, 40, 40);
 
-        jToggleButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/perfil.png"))); // NOI18N
-        jToggleButton2.setText(" Pefil");
-        getContentPane().add(jToggleButton2);
-        jToggleButton2.setBounds(10, 160, 140, 40);
+        jToggleButtonPerfil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jToggleButtonPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/perfil.png"))); // NOI18N
+        jToggleButtonPerfil.setText(" Pefil");
+        jToggleButtonPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonPerfilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jToggleButtonPerfil);
+        jToggleButtonPerfil.setBounds(10, 160, 140, 40);
 
         jToggleButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ajuda.png"))); // NOI18N
         jToggleButtonAjuda.setText("Ajuda & Sobre");
+        jToggleButtonAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonAjudaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jToggleButtonAjuda);
         jToggleButtonAjuda.setBounds(10, 210, 140, 40);
 
         jButtonMensagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensagem.png"))); // NOI18N
         jButtonMensagem.setToolTipText("Mensagem");
+        jButtonMensagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMensagemActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonMensagem);
-        jButtonMensagem.setBounds(730, 550, 50, 30);
-
-        jLabelNomeAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelNomeAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNomeAdmin.setText("Nome do admin.");
-        getContentPane().add(jLabelNomeAdmin);
-        jLabelNomeAdmin.setBounds(30, 100, 160, 17);
-
-        jLabelFotoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/administrador.png"))); // NOI18N
-        getContentPane().add(jLabelFotoAdmin);
-        jLabelFotoAdmin.setBounds(50, 30, 90, 70);
+        jButtonMensagem.setBounds(730, 540, 50, 40);
 
         jButtonMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medico.png"))); // NOI18N
         jButtonMedico.setToolTipText("Médico");
@@ -130,7 +136,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
         getContentPane().add(jButtonRelatorio);
         jButtonRelatorio.setBounds(650, 170, 60, 60);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableNome.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,56 +147,68 @@ public class TelaAdministrador extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableNome);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(200, 400, 460, 90);
 
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                jFormattedTextFieldNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(200, 360, 280, 20);
+        getContentPane().add(jFormattedTextFieldNome);
+        jFormattedTextFieldNome.setBounds(200, 360, 280, 30);
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
-        jToggleButton1.setText(" Pesquisar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
+        jToggleButtonPesquisar.setText(" Pesquisar");
+        jToggleButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButtonPesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(510, 360, 120, 23);
+        getContentPane().add(jToggleButtonPesquisar);
+        jToggleButtonPesquisar.setBounds(510, 360, 120, 25);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Cadastrar:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(220, 130, 70, 14);
+        jLabelCadastrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelCadastrar.setText("Cadastrar:");
+        getContentPane().add(jLabelCadastrar);
+        jLabelCadastrar.setBounds(220, 130, 70, 14);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Pesquisar funcionário:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(210, 320, 180, 30);
+        jLabelPesquisar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPesquisar.setText("Pesquisar funcionário:");
+        getContentPane().add(jLabelPesquisar);
+        jLabelPesquisar.setBounds(210, 320, 180, 30);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Pacientes:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(480, 130, 70, 17);
+        jLabelPacientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPacientes.setText("Pacientes:");
+        getContentPane().add(jLabelPacientes);
+        jLabelPacientes.setBounds(480, 130, 70, 17);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Relatório:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(650, 130, 80, 17);
+        jLabelRelatorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelRelatorio.setText("Relatório:");
+        getContentPane().add(jLabelRelatorio);
+        jLabelRelatorio.setBounds(650, 130, 80, 17);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 30, 160, 560);
+        jPanelFundoLateral.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelFundoLateral.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 800, 30);
+        jLabelNomeAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelNomeAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNomeAdmin.setText("Nome do admin.");
+        jPanelFundoLateral.add(jLabelNomeAdmin);
+        jLabelNomeAdmin.setBounds(30, 100, 110, 20);
+
+        jLabelFotoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/administrador.png"))); // NOI18N
+        jPanelFundoLateral.add(jLabelFotoAdmin);
+        jLabelFotoAdmin.setBounds(60, 30, 50, 70);
+
+        getContentPane().add(jPanelFundoLateral);
+        jPanelFundoLateral.setBounds(0, 30, 160, 560);
+
+        jPanelFundoSuperior.setBackground(new java.awt.Color(102, 102, 255));
+        getContentPane().add(jPanelFundoSuperior);
+        jPanelFundoSuperior.setBounds(0, 0, 800, 30);
 
         setSize(new java.awt.Dimension(816, 630));
         setLocationRelativeTo(null);
@@ -201,16 +219,19 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMedicoActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null,"Você saiu","logout",JOptionPane.INFORMATION_MESSAGE);
+        dispose();
+        new Login().setVisible(true);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void jFormattedTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldNomeActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jToggleButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPesquisarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_jToggleButtonPesquisarActionPerformed
 
     private void jButtonMedicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMedicoMouseEntered
         // TODO add your handling code here:
@@ -220,40 +241,20 @@ public class TelaAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMedicoMouseReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMensagemActionPerformed
+        new TelaMensagem().setVisible(true);
+        
+    }//GEN-LAST:event_jButtonMensagemActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAdministrador().setVisible(true);
-            }
-        });
-    }
+    private void jToggleButtonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPerfilActionPerformed
+        new TelaPerfilFuncionario(jLabelNomeAdmin.getText()).setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jToggleButtonPerfilActionPerformed
+
+    private void jToggleButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAjudaActionPerformed
+        new TelaAjuda().setVisible(true);
+    }//GEN-LAST:event_jToggleButtonAjudaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEnfermeira;
@@ -262,20 +263,20 @@ public class TelaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPaciente;
     private javax.swing.JButton jButtonRelatorio;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JFormattedTextField jFormattedTextFieldNome;
     private javax.swing.JLabel jLabelAdministrador;
+    private javax.swing.JLabel jLabelCadastrar;
     private javax.swing.JLabel jLabelFotoAdmin;
     private javax.swing.JLabel jLabelNomeAdmin;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabelPacientes;
+    private javax.swing.JLabel jLabelPesquisar;
+    private javax.swing.JLabel jLabelRelatorio;
+    private javax.swing.JPanel jPanelFundoLateral;
+    private javax.swing.JPanel jPanelFundoSuperior;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JTable jTableNome;
     private javax.swing.JToggleButton jToggleButtonAjuda;
+    private javax.swing.JToggleButton jToggleButtonPerfil;
+    private javax.swing.JToggleButton jToggleButtonPesquisar;
     // End of variables declaration//GEN-END:variables
 }

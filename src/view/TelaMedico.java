@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
+
+import control.conexaoBD;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Tiemy Shibuya
  */
 public class TelaMedico extends javax.swing.JFrame {
+    conexaoBD con = new conexaoBD();
 
-    /**
-     * Creates new form TelaMedico
-     */
-    public TelaMedico() {
+    public TelaMedico(String usuario) {
         initComponents();
+        jLabelNomedoMedico.setText(usuario);
     }
 
     /**
@@ -28,28 +25,24 @@ public class TelaMedico extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jToggleButtonAjuda = new javax.swing.JToggleButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
-        jLabelNomedoMedico = new javax.swing.JLabel();
-        jLabelFotoMedico = new javax.swing.JLabel();
         jButtonMensagem = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelFundoLateral = new javax.swing.JPanel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jLabelFotoMedico = new javax.swing.JLabel();
+        jToggleButtonAjuda = new javax.swing.JToggleButton();
+        jLabelNomedoMedico = new javax.swing.JLabel();
+        jLabelPaciente = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePaciente = new javax.swing.JTable();
+        jTextFieldNome = new javax.swing.JTextField();
+        jButtonPesquisar = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
-
-        jToggleButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ajuda.png"))); // NOI18N
-        jToggleButtonAjuda.setText("Ajuda & Sobre");
-        getContentPane().add(jToggleButtonAjuda);
-        jToggleButtonAjuda.setBounds(10, 200, 137, 40);
-
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/perfil.png"))); // NOI18N
-        jToggleButton1.setText("Perfil");
-        getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(10, 140, 140, 40);
 
         jButton1.setBackground(new java.awt.Color(153, 153, 255));
         jButton1.setForeground(new java.awt.Color(204, 204, 255));
@@ -63,74 +56,118 @@ public class TelaMedico extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(10, 500, 40, 40);
 
-        jLabelNomedoMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelNomedoMedico.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNomedoMedico.setText("Nome do médico");
-        getContentPane().add(jLabelNomedoMedico);
-        jLabelNomedoMedico.setBounds(30, 80, 120, 30);
-
-        jLabelFotoMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medico.png"))); // NOI18N
-        getContentPane().add(jLabelFotoMedico);
-        jLabelFotoMedico.setBounds(50, 20, 110, 60);
-
         jButtonMensagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensagem.png"))); // NOI18N
+        jButtonMensagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMensagemActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonMensagem);
         jButtonMensagem.setBounds(700, 510, 50, 40);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 160, 570);
+        jPanelFundoLateral.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelFundoLateral.setLayout(null);
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/perfil.png"))); // NOI18N
+        jToggleButton1.setText("Perfil");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        jPanelFundoLateral.add(jToggleButton1);
+        jToggleButton1.setBounds(20, 140, 150, 40);
+
+        jLabelFotoMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/medico.png"))); // NOI18N
+        jPanelFundoLateral.add(jLabelFotoMedico);
+        jLabelFotoMedico.setBounds(70, 20, 110, 60);
+
+        jToggleButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ajuda.png"))); // NOI18N
+        jToggleButtonAjuda.setText("Ajuda & Sobre");
+        jToggleButtonAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonAjudaActionPerformed(evt);
+            }
+        });
+        jPanelFundoLateral.add(jToggleButtonAjuda);
+        jToggleButtonAjuda.setBounds(20, 200, 150, 40);
+
+        jLabelNomedoMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelNomedoMedico.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNomedoMedico.setText("Nome do médico");
+        jPanelFundoLateral.add(jLabelNomedoMedico);
+        jLabelNomedoMedico.setBounds(40, 80, 120, 30);
+
+        getContentPane().add(jPanelFundoLateral);
+        jPanelFundoLateral.setBounds(0, 0, 190, 570);
+
+        jLabelPaciente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaciente.setText("Pacientes:");
+        getContentPane().add(jLabelPaciente);
+        jLabelPaciente.setBounds(200, 60, 170, 22);
+
+        jTablePaciente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePaciente);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(200, 130, 452, 90);
+        getContentPane().add(jTextFieldNome);
+        jTextFieldNome.setBounds(200, 90, 240, 30);
+
+        jButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+        getContentPane().add(jButtonPesquisar);
+        jButtonPesquisar.setBounds(470, 90, 120, 30);
 
         setSize(new java.awt.Dimension(775, 602));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        JOptionPane.showMessageDialog(null,"Você vai sair","logout",JOptionPane.INFORMATION_MESSAGE);
+        dispose();
+        new Login().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        new TelaPerfilFuncionario(jLabelNomedoMedico.getText()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaMedico().setVisible(true);
-            }
-        });
-    }
+    private void jButtonMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMensagemActionPerformed
+        new TelaMensagem().setVisible(true);
+    }//GEN-LAST:event_jButtonMensagemActionPerformed
+
+    private void jToggleButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAjudaActionPerformed
+        new TelaAjuda().setVisible(true);
+        
+    }//GEN-LAST:event_jToggleButtonAjudaActionPerformed
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonMensagem;
+    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFotoMedico;
     private javax.swing.JLabel jLabelNomedoMedico;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelPaciente;
+    private javax.swing.JPanel jPanelFundoLateral;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablePaciente;
+    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButtonAjuda;
     // End of variables declaration//GEN-END:variables

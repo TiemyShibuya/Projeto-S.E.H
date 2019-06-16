@@ -41,9 +41,9 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabelPerfil = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jButtonVoltar = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jPanelFundoSuperior = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,46 +125,46 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         jPanel2.add(jLabelNome);
         jLabelNome.setBounds(20, 130, 110, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/seta.png"))); // NOI18N
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/seta.png"))); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(30, 490, 89, 33);
+        jPanel2.add(jButtonVoltar);
+        jButtonVoltar.setBounds(30, 490, 89, 33);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 30, 140, 590);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        getContentPane().add(jButton2);
-        jButton2.setBounds(730, 530, 40, 30);
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        getContentPane().add(jButtonSalvar);
+        jButtonSalvar.setBounds(730, 530, 40, 30);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel1.setLayout(null);
+        jPanelFundoSuperior.setBackground(new java.awt.Color(102, 102, 255));
+        jPanelFundoSuperior.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Perfil do paciente");
-        jPanel1.add(jLabel3);
+        jPanelFundoSuperior.add(jLabel3);
         jLabel3.setBounds(670, 10, 120, 20);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 790, 30);
+        getContentPane().add(jPanelFundoSuperior);
+        jPanelFundoSuperior.setBounds(0, 0, 790, 30);
 
         setSize(new java.awt.Dimension(799, 611));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
@@ -183,7 +183,7 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelRG;
     private javax.swing.JLabel jLabelSexo;
     private javax.swing.JLabel jLabelTel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelFundoSuperior;
     // End of variables declaration//GEN-END:variables
 }

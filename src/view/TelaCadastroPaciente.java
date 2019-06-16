@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 /**
@@ -11,9 +6,6 @@ package view;
  */
 public class TelaCadastroPaciente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaCadastroPaciente
-     */
     public TelaCadastroPaciente() {
         initComponents();
     }
@@ -44,29 +36,30 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jCheckBoxFeminino = new javax.swing.JCheckBox();
+        jCheckBoxMasculino = new javax.swing.JCheckBox();
+        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldIdade = new javax.swing.JTextField();
+        jTextFieldPeso = new javax.swing.JTextField();
+        jTextFieldAltura = new javax.swing.JTextField();
+        jTextFieldCPF = new javax.swing.JTextField();
+        jTextFieldDataNasc = new javax.swing.JTextField();
+        jTextFieldEnd = new javax.swing.JTextField();
+        jTextFieldTelefone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaDescricao = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jLabelCadastro = new javax.swing.JLabel();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -78,7 +71,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Nome Completo:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(170, 100, 160, 22);
+        jLabel5.setBounds(170, 100, 133, 22);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Idade:");
@@ -123,62 +116,62 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Descrição:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(180, 360, 90, 20);
+        jLabel14.setBounds(170, 340, 90, 20);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Tipo de Emergência");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(210, 550, 160, 30);
+        jLabel15.setBounds(200, 530, 160, 30);
 
-        jCheckBox1.setText("F");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxFeminino.setText("F");
+        jCheckBoxFeminino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxFemininoActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(620, 100, 40, 25);
+        getContentPane().add(jCheckBoxFeminino);
+        jCheckBoxFeminino.setBounds(620, 100, 40, 23);
 
-        jCheckBox2.setText("M");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(670, 100, 60, 25);
+        jCheckBoxMasculino.setText("M");
+        getContentPane().add(jCheckBoxMasculino);
+        jCheckBoxMasculino.setBounds(670, 100, 60, 23);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(310, 110, 150, 22);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(230, 150, 60, 22);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(220, 190, 70, 22);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(620, 150, 50, 22);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(220, 230, 180, 22);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(340, 260, 150, 22);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(260, 300, 160, 22);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(640, 200, 180, 22);
+        getContentPane().add(jTextFieldNome);
+        jTextFieldNome.setBounds(310, 100, 180, 20);
+        getContentPane().add(jTextFieldIdade);
+        jTextFieldIdade.setBounds(230, 150, 60, 20);
+        getContentPane().add(jTextFieldPeso);
+        jTextFieldPeso.setBounds(220, 190, 70, 20);
+        getContentPane().add(jTextFieldAltura);
+        jTextFieldAltura.setBounds(620, 150, 50, 20);
+        getContentPane().add(jTextFieldCPF);
+        jTextFieldCPF.setBounds(220, 230, 180, 20);
+        getContentPane().add(jTextFieldDataNasc);
+        jTextFieldDataNasc.setBounds(340, 260, 150, 20);
+        getContentPane().add(jTextFieldEnd);
+        jTextFieldEnd.setBounds(260, 300, 160, 20);
+        getContentPane().add(jTextFieldTelefone);
+        jTextFieldTelefone.setBounds(640, 200, 180, 20);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaDescricao);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(280, 360, 450, 130);
+        jScrollPane1.setBounds(270, 340, 450, 130);
 
         jButton1.setText("1");
         getContentPane().add(jButton1);
-        jButton1.setBounds(400, 550, 70, 40);
+        jButton1.setBounds(390, 530, 70, 40);
 
         jButton2.setText("2");
         getContentPane().add(jButton2);
-        jButton2.setBounds(460, 550, 80, 40);
+        jButton2.setBounds(450, 530, 80, 40);
 
         jButton3.setText("3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +180,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(530, 550, 80, 40);
+        jButton3.setBounds(520, 530, 80, 40);
 
         jButton4.setText("4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -196,39 +189,42 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(600, 550, 100, 40);
+        jButton4.setBounds(590, 530, 100, 40);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel16.setText("CADASTRO DO PACIENTE");
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(360, 10, 340, 40);
+        jLabelCadastro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelCadastro.setText("CADASTRO DO PACIENTE");
+        getContentPane().add(jLabelCadastro);
+        jLabelCadastro.setBounds(360, 10, 280, 40);
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton5.setText("SALVAR");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(330, 660, 120, 30);
+        jButtonSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/selecionar.png"))); // NOI18N
+        jButtonSalvar.setText("SALVAR");
+        getContentPane().add(jButtonSalvar);
+        jButtonSalvar.setBounds(320, 610, 150, 30);
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton6.setText("CANCELAR");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(540, 660, 119, 31);
+        jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jButtonCancelar.setText("CANCELAR");
+        getContentPane().add(jButtonCancelar);
+        jButtonCancelar.setBounds(530, 610, 150, 31);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
         jPanel1.setLayout(null);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/nurse.jpeg"))); // NOI18N
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(40, 70, 50, 60);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enfermeira.png"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(50, 70, 50, 60);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 150, 700);
+        jPanel1.setBounds(0, 0, 150, 660);
 
-        pack();
+        setSize(new java.awt.Dimension(909, 698));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFemininoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxFemininoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -238,44 +234,11 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCadastroPaciente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -287,34 +250,34 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JCheckBox jCheckBoxFeminino;
+    private javax.swing.JCheckBox jCheckBoxMasculino;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCadastro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextArea jTextAreaDescricao;
+    private javax.swing.JTextField jTextFieldAltura;
+    private javax.swing.JTextField jTextFieldCPF;
+    private javax.swing.JTextField jTextFieldDataNasc;
+    private javax.swing.JTextField jTextFieldEnd;
+    private javax.swing.JTextField jTextFieldIdade;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPeso;
+    private javax.swing.JTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class Pessoa {
     //Variáveis
-    protected String nome;
     protected String cpf;
-    protected Date data_de_nascimento;
+    protected String nome;
+    protected String sexo;
     protected int idade;
-    protected String RG;
+    protected Date data_de_nascimento;   
     protected String telefone;
     protected String endereco;
+    protected String RG;
     
     //Métodos
     public String getNome(){
@@ -24,6 +25,12 @@ public class Pessoa {
     }
     public void setCPF(String cpf){
         this.cpf = cpf;
+    }
+    public String getSexo(){
+        return sexo;
+    }
+    public void setSexo(String sexo){
+        this.sexo = sexo;
     }
     public Date getData_de_nascimento(){
         return data_de_nascimento;
@@ -60,11 +67,12 @@ public class Pessoa {
     public Pessoa(){
         System.out.println("Objeto pessoa criado");
     }
-    public Pessoa(String Nome,String Cpf,Date data,int Idade,String rg,String Telefone,String Endereco){
-        nome = Nome;
+    public Pessoa(String Cpf,String Nome,String Sexo,int Idade,Date data,String rg,String Telefone,String Endereco){   
         cpf = Cpf;
-        data_de_nascimento = data;
+        nome = Nome;
+        sexo = Sexo;
         idade = Idade;
+        data_de_nascimento = data;
         RG = rg;
         telefone = Telefone;
         endereco = Endereco;

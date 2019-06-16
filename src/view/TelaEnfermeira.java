@@ -84,7 +84,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonMensagem);
-        jButtonMensagem.setBounds(710, 510, 50, 40);
+        jButtonMensagem.setBounds(710, 520, 50, 40);
 
         jLabelNomeEnfermeira.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNomeEnfermeira.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,6 +97,11 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         jLabelFotoEnfermeira.setBounds(60, 20, 50, 70);
 
         jToggleButtonPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jToggleButtonPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonPacienteActionPerformed(evt);
+            }
+        });
         getContentPane().add(jToggleButtonPaciente);
         jToggleButtonPaciente.setBounds(240, 90, 60, 60);
 
@@ -120,19 +125,19 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(200, 370, 400, 90);
         getContentPane().add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(200, 320, 260, 20);
+        jFormattedTextField1.setBounds(200, 320, 260, 30);
 
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         jToggleButton3.setText("Pesquisar");
         getContentPane().add(jToggleButton3);
-        jToggleButton3.setBounds(490, 320, 100, 25);
+        jToggleButton3.setBounds(490, 320, 100, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Pesquisar médico de plantão:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(200, 270, 270, 30);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 180, 570);
 
@@ -159,6 +164,10 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     private void jToggleButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAjudaActionPerformed
         new TelaAjuda().setVisible(true);
     }//GEN-LAST:event_jToggleButtonAjudaActionPerformed
+
+    private void jToggleButtonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPacienteActionPerformed
+        new TelaCadastroPaciente().setVisible(true);
+    }//GEN-LAST:event_jToggleButtonPacienteActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

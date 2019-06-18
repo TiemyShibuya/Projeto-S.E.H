@@ -2,9 +2,9 @@ package projeto;
 
 import java.util.Date;
 
-public class Medico {
+public class Administrador {
 
-    private int idMed;
+    private int idAdmin;
     private String nome;
     private String cpf;
     private String sexo;
@@ -12,18 +12,16 @@ public class Medico {
     private Date dataNasc;
     private String telefone;
     private String endereco;
-    private String especialidade;
-    private String relatorio;
     private String usuario;
     private String senha;
     private int permissao;
 
-    public int getIdMed() {
-        return idMed;
+    public int getIdAdmin() {
+        return idAdmin;
     }
 
-    public void setIdMed(int idMed) {
-        this.idMed = idMed;
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     public String getNome() {
@@ -80,22 +78,6 @@ public class Medico {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    public String getRelatorio() {
-        return relatorio;
-    }
-
-    public void setRelatorio(String relatorio) {
-        this.relatorio = relatorio;
     }
 
     public String getUsuario() {

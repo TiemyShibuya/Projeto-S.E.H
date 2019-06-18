@@ -19,20 +19,23 @@ public class ControlEnfermeira {
     ResultSet rs = null;
 
     public void Create(Enfermeira enf) {
-        String query = "insert into enfermeira (cpf,nome,sexo,idade,DataNasc,telefone,endereco,cargo)values(?,?,?,?,?,?,?,?)";
+        String query = "insert into enfermeira (cpf,nome,sexo,idade,DataNasc,telefone,endereco,cargo,usuario,senha,permissao)values(?,?,?,?,?,?,?,?,?,?,?)";
         con.Connect();
 
         try {
             pst = con.conn.prepareStatement(query);
 
-            pst.setString(1, enf.getCPF());
+            pst.setString(1, enf.getCpf());
             pst.setString(2, enf.getNome());
             pst.setString(3, enf.getSexo());
             pst.setInt(4, enf.getIdade());
-            pst.setDate(5, (Date) enf.getData_de_nascimento());
+            pst.setDate(5, (Date) enf.getDataNasc());
             pst.setString(6, enf.getTelefone());
             pst.setString(7, enf.getEndereco());
             pst.setString(8, enf.getCargo());
+            pst.setString(9, enf.getUsuario());
+            pst.setString(10, enf.getSenha());
+            pst.setInt(11, enf.getPermissao());
 
             pst.execute();
 
@@ -43,21 +46,24 @@ public class ControlEnfermeira {
     }
 
     public void Update(Enfermeira enf, int id) {
-        String query = "update enfermeira into cpf=?,nome=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,cargo=? where codEnf = ?";
+        String query = "update enfermeira into cpf=?,nome=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,cargo=?,usuario=?,senha=?,permissao=? where idEnf = ?";
         con.Connect();
 
         try {
             pst = con.conn.prepareStatement(query);
 
-            pst.setString(1, enf.getCPF());
+            pst.setString(1, enf.getCpf());
             pst.setString(2, enf.getNome());
             pst.setString(3, enf.getSexo());
             pst.setInt(4, enf.getIdade());
-            pst.setDate(5, (Date) enf.getData_de_nascimento());
+            pst.setDate(5, (Date) enf.getDataNasc());
             pst.setString(6, enf.getTelefone());
             pst.setString(7, enf.getEndereco());
             pst.setString(8, enf.getCargo());
-            pst.setInt(9, id);
+            pst.setString(9, enf.getUsuario());
+            pst.setString(10, enf.getSenha());
+            pst.setInt(11, enf.getPermissao());
+            pst.setInt(12, id);
 
             pst.execute();
 
@@ -70,11 +76,12 @@ public class ControlEnfermeira {
     }
 
     public void Delete(int id) {
-        String query = "delete from enfermeira where codEnf=?";
+        String query = "delete from enfermeira where idEnf=?";
         con.Connect();
 
         try {
             pst = con.conn.prepareStatement(query);
+
             pst.setInt(1, id);
 
             pst.execute();

@@ -1,22 +1,14 @@
 package projeto;
 
-public class Ficha {
+public class Ficha extends Paciente {
 
-    protected int codigoPac;
     protected int peso;
     protected int altura;
     protected String alergia;
     protected String descricao;
     protected String tipoSG;
     protected String medicamento;
-
-    public void setCodigoPac(int cod) {
-        this.codigoPac = cod;
-    }
-
-    public int getCodigoPac() {
-        return codigoPac;
-    }
+    protected int idPac;
 
     public void setAltura(int altura) {
         this.altura = altura;
@@ -66,20 +58,12 @@ public class Ficha {
         return medicamento;
     }
 
-    //construtores
-    public Ficha() {
-        System.out.println("Objeto ficha criado");
+    public void setIdpac(int idPac) {
+        this.idPac = idPac;
     }
 
-    public Ficha(int cod, int alt, int pes, String desc, String tipo, String alerg, String med) {
-        codigoPac = cod;
-        altura = alt;
-        peso = pes;
-        descricao = desc;
-        tipoSG = tipo;
-        alergia = alerg;
-        medicamento = med;
-
+    public int getIdpac() {
+        return idPac;
     }
 
 }

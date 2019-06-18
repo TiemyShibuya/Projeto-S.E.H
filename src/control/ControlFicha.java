@@ -6,10 +6,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import projeto.Ficha;
 
-/**
- *
- * @author Tiemy Shibuya
- */
 public class ControlFicha {
 
     conexaoBD con = new conexaoBD();
@@ -18,7 +14,7 @@ public class ControlFicha {
     ResultSet rs = null;
 
     public void Create(Ficha f) {
-        String query = "insert into ficha (peso,altura,alergia,descricao,tipoSG,medicamento) values(?,?,?,?,?,?)";
+        String query = "insert into ficha (peso,altura,alergia,descricao,tipoSG,medicamento,idPac) values(?,?,?,?,?,?,?)";
         con.Connect();
         try {
             pst = con.conn.prepareStatement(query);
@@ -29,6 +25,7 @@ public class ControlFicha {
             pst.setString(4, f.getDescricao());
             pst.setString(5, f.getTipoSanguineo());
             pst.setString(6, f.getMedicamento());
+            pst.setInt(7, f.getIdpac());
 
             pst.execute();
 
@@ -39,7 +36,7 @@ public class ControlFicha {
     }
 
     public void Update(Ficha f, int id) {
-        String query = "update ficha into peso=?,altura=?,alergia=?,descricao=? where codigoPac=?";
+        String query = "update ficha set peso=?,altura=?,alergia=?,descricao=?,tipoSG=?,medicamento=? where idPac=?";
         con.Connect();
 
         try {
@@ -51,7 +48,8 @@ public class ControlFicha {
             pst.setString(4, f.getDescricao());
             pst.setString(5, f.getTipoSanguineo());
             pst.setString(6, f.getMedicamento());
-            pst.setInt(7, id);
+            pst.setInt(7, f.getIdpac());
+            pst.setInt(8, id);
 
             pst.execute();
 
@@ -65,7 +63,7 @@ public class ControlFicha {
     }
 
     public void Delete(int id) {
-        String query = "delete from ficha where codigoPac=?";
+        String query = "delete from ficha where idPac=?";
         con.Connect();
 
         try {

@@ -1,16 +1,84 @@
 package projeto;
 
-public class Enfermeira extends Funcionario {
+import java.util.Date;
 
-    protected int codEnf;
-    protected String cargo;
+public class Enfermeira {
 
-    public int getCodigo() {
-        return codEnf;
+    private int idEnf;
+    private String nome;
+    private String cpf;
+    private String sexo;
+    private int idade;
+    private Date dataNasc;
+    private String telefone;
+    private String endereco;
+    private String cargo;
+    private String usuario;
+    private String senha;
+    private int permissao;
+
+    public int getIdEnf() {
+        return idEnf;
     }
 
-    public void setCodigo(int codigo) {
-        this.codEnf = codigo;
+    public void setIdEnf(int idEnf) {
+        this.idEnf = idEnf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getCargo() {
@@ -21,33 +89,27 @@ public class Enfermeira extends Funcionario {
         this.cargo = cargo;
     }
 
-    public void FazerCadastro() {
-        System.out.println("Enfermeira fazendo o cadastro do paciente");
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void PesquisarCadastro() {
-        System.out.println("Enfermeira pesquisando cadastro do paciente");
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public void FazerUpdate() {
-        System.out.println("Enfermeira fazendo update dos dados");
+    public String getSenha() {
+        return senha;
     }
 
-    public void PesquisarMedico() {
-        System.out.println("Enfermeira pesquisando o médico");
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public void PreencherFicha() {
-        System.out.println("Enfermeira preenchendo a ficha");
+    public int getPermissao() {
+        return permissao;
     }
 
-    //Construtores
-    public Enfermeira() {
-        System.out.println("Objeto enfermeira criado");
-    }
-
-    public Enfermeira(int codigo, String Cargo) {
-        codEnf = codigo;
-        cargo = Cargo;
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
     }
 }

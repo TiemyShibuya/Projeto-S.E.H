@@ -1,34 +1,98 @@
 package projeto;
 
-public class Paciente extends Pessoa {
+import java.util.Date;
 
-    protected int codPac;
-    protected String emergencia;
+public class Paciente {
 
-    //métodos
-    public void setCodigoPaciente(int cod) {
-        this.codPac = cod;
+    private int idPac;
+    private String nome;
+    private String cpf;
+    private String sexo;
+    private int idade;
+    private Date dataNasc;
+    private String telefone;
+    private String endereco;
+    private String rg;
+    private int emergencia;
+
+    public int getIdPac() {
+        return idPac;
     }
 
-    public int getCodigoPaciente() {
-        return codPac;
+    public void setIdPac(int idPac) {
+        this.idPac = idPac;
     }
 
-    public void setEmergencia(String em) {
-        this.emergencia = em;
+    public String getNome() {
+        return nome;
     }
 
-    public String getEmergencia() {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public int getEmergencia() {
         return emergencia;
     }
 
-    //Construtores
-    public Paciente() {
-        System.out.println("Objeto Paciente criado");
+    public void setEmergencia(int emergencia) {
+        this.emergencia = emergencia;
     }
 
-    public Paciente(int cod, String emerg) {
-        codPac = cod;
-        emergencia = emerg;
-    }
 }

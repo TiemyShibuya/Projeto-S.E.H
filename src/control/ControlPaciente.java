@@ -7,10 +7,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import projeto.Paciente;
 
-/**
- *
- * @author Tiemy Shibuya
- */
 public class ControlPaciente {
 
     conexaoBD con = new conexaoBD();
@@ -19,20 +15,22 @@ public class ControlPaciente {
     ResultSet rs = null;
 
     public void Create(Paciente pac) {
-        String query = "insert into paciente (cpf,nome,sexo,idade,DataNasc,telefone,endereco,emergencia) values (?,?,?,?,?,?,?,?)";
+        String query = "insert into pessoa (nome,cpf,sexo,idade,dataNasc,telefone,endereco,rg,emergencia) values(?,?,?,?,?,?,?,?,?)";
+
         con.Connect();
 
         try {
             pst = con.conn.prepareStatement(query);
 
-            pst.setString(1, pac.getCPF());
-            pst.setString(2, pac.getNome());
+            pst.setString(1, pac.getNome());
+            pst.setString(2, pac.getCpf());
             pst.setString(3, pac.getSexo());
             pst.setInt(4, pac.getIdade());
-            pst.setDate(5, (Date) pac.getData_de_nascimento());
+            pst.setDate(5, (Date) pac.getDataNasc());
             pst.setString(6, pac.getTelefone());
             pst.setString(7, pac.getEndereco());
-            pst.setString(8, pac.getEmergencia());
+            pst.setString(8, pac.getRg());
+            pst.setInt(9, pac.getEmergencia());
 
             pst.execute();
 
@@ -44,20 +42,21 @@ public class ControlPaciente {
     }
 
     public void Update(Paciente pac, int id) {
-        String query = "upate paciente into cpf=?,nome=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,emergencia=?";
+        String query = "update pessoa into nome=?,cpf=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,emergencia=? where idPac=?";
         con.Connect();
         try {
             pst = con.conn.prepareStatement(query);
 
-            pst.setString(1, pac.getCPF());
-            pst.setString(2, pac.getNome());
+            pst.setString(1, pac.getNome());
+            pst.setString(2, pac.getCpf());
             pst.setString(3, pac.getSexo());
             pst.setInt(4, pac.getIdade());
-            pst.setDate(5, (Date) pac.getData_de_nascimento());
+            pst.setDate(5, (Date) pac.getDataNasc());
             pst.setString(6, pac.getTelefone());
             pst.setString(7, pac.getEndereco());
-            pst.setString(8, pac.getRG());
-            pst.setString(9, pac.getEmergencia());
+            pst.setString(8, pac.getRg());
+            pst.setInt(9, pac.getEmergencia());
+            pst.setInt(10, id);
 
             pst.execute();
 
@@ -69,7 +68,7 @@ public class ControlPaciente {
     }
 
     public void Delete(int id) {
-        String query = "delete from paciente where codPac=?";
+        String query = "delete from paciente where idPac=?";
         con.Connect();
 
         try {

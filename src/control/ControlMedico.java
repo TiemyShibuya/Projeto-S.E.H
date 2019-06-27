@@ -10,13 +10,13 @@ import projeto.Medico;
 public class ControlMedico {
 
     /*conexão com o banco*/
-    conexaoBD con = new conexaoBD();
+    conexaoDB con = new conexaoDB();
     Medico med = new Medico();
     PreparedStatement pst = null;
     ResultSet rs = null;
 
     public void Create(Medico med) {
-        String query = "insert into medico(nome,cpf,sexo,idade,dataNasc,telefone,endereco,especialidade,relatorio,usuario,senha,permissao) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "insert into medico(nome,cpf,sexo,idade,dataNasc,telefone,endereco,especialidade,permissao,usuario,senha) values(?,?,?,?,?,?,?,?,?,?,?)";
         con.Connect();
 
         try {
@@ -29,13 +29,12 @@ public class ControlMedico {
             pst.setDate(5, (Date) med.getDataNasc());
             pst.setString(6, med.getTelefone());
             pst.setString(7, med.getEndereco());
-            pst.setString(8, med.getUsuario());
-            pst.setString(9, med.getSenha());
-            pst.setInt(10, med.getPermissao());
-            pst.setString(11, med.getEspecialidade());
-            pst.setString(12, med.getRelatorio());
+            pst.setString(8, med.getEspecialidade());
+            pst.setInt(9, med.getPermissao());
+            pst.setString(10, med.getUsuario());
+            pst.setString(11, med.getSenha());
 
-            pst.execute();
+            pst.executeUpdate();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível cadastrar!", "Cadastro de Funcionario", JOptionPane.ERROR_MESSAGE);
@@ -46,7 +45,7 @@ public class ControlMedico {
     }
 
     public void Update(Medico med, int id) {
-        String query = "update medico set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,rg=?,especialidade=?,relatorio=?,usuario=?,senha=?,permissao=? where idMed=?";
+        String query = "update medico set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,especialidade=?,permissao=?,usuario=?,senha=? where idMed=?";
         con.Connect();
 
         try {
@@ -59,12 +58,12 @@ public class ControlMedico {
             pst.setDate(5, (Date) med.getDataNasc());
             pst.setString(6, med.getTelefone());
             pst.setString(7, med.getEndereco());
-            pst.setString(8, med.getUsuario());
-            pst.setString(9, med.getSenha());
-            pst.setInt(10, med.getPermissao());
-            pst.setString(11, med.getEspecialidade());
-            pst.setString(12, med.getRelatorio());
-            pst.setInt(13, id);
+            pst.setString(8, med.getEspecialidade());
+            pst.setInt(9, med.getPermissao());
+            pst.setString(10, med.getUsuario());
+            pst.setString(11, med.getSenha());
+
+            pst.setInt(12, id);
 
             pst.execute();
 
@@ -77,7 +76,7 @@ public class ControlMedico {
     }
 
     public void Delete(int id) {
-        String query = "delete from medico where idMed=?";
+        String query = "delete medico from  where idMed=?";
         con.Connect();
 
         try {

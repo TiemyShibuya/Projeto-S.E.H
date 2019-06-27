@@ -13,10 +13,9 @@ public class Medico {
     private String telefone;
     private String endereco;
     private String especialidade;
-    private String relatorio;
+    private int permissao;
     private String usuario;
     private String senha;
-    private int permissao;
 
     public int getIdMed() {
         return idMed;
@@ -90,12 +89,12 @@ public class Medico {
         this.especialidade = especialidade;
     }
 
-    public String getRelatorio() {
-        return relatorio;
+    public int getPermissao() {
+        return permissao;
     }
 
-    public void setRelatorio(String relatorio) {
-        this.relatorio = relatorio;
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
     }
 
     public String getUsuario() {
@@ -112,14 +111,6 @@ public class Medico {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public int getPermissao() {
-        return permissao;
-    }
-
-    public void setPermissao(int permissao) {
-        this.permissao = permissao;
     }
 
 }

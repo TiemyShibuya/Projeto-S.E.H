@@ -8,7 +8,7 @@ import projeto.Ficha;
 
 public class ControlFicha {
 
-    conexaoBD con = new conexaoBD();
+    conexaoDB con = new conexaoDB();
     Ficha f = new Ficha();
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -27,7 +27,7 @@ public class ControlFicha {
             pst.setString(6, f.getMedicamento());
             pst.setInt(7, f.getIdpac());
 
-            pst.execute();
+            pst.executeUpdate();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível cadastrar!", "Cadastro de Funcionario", JOptionPane.ERROR_MESSAGE);

@@ -9,13 +9,13 @@ import projeto.Paciente;
 
 public class ControlPaciente {
 
-    conexaoBD con = new conexaoBD();
+    conexaoDB con = new conexaoDB();
     Paciente pac = new Paciente();
     PreparedStatement pst = null;
     ResultSet rs = null;
 
     public void Create(Paciente pac) {
-        String query = "insert into pessoa (nome,cpf,sexo,idade,dataNasc,telefone,endereco,rg,emergencia) values(?,?,?,?,?,?,?,?,?)";
+        String query = "insert into peciente (nome,cpf,sexo,idade,dataNasc,telefone,endereco,rg,emergencia,enfermeira_id,medico_id) values(?,?,?,?,?,?,?,?,?,?,?)";
 
         con.Connect();
 
@@ -31,8 +31,12 @@ public class ControlPaciente {
             pst.setString(7, pac.getEndereco());
             pst.setString(8, pac.getRg());
             pst.setInt(9, pac.getEmergencia());
+            pst.setInt(10, pac.getEnfid());
+            pst.setInt(11, pac.getMedid());
 
             pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Cadastro feito", "Cadastro de Paciente", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível cadastrar!", "Cadastro de Funcionario", JOptionPane.ERROR_MESSAGE);
@@ -42,7 +46,7 @@ public class ControlPaciente {
     }
 
     public void Update(Paciente pac, int id) {
-        String query = "update pessoa into nome=?,cpf=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,emergencia=? where idPac=?";
+        String query = "update paciente set nome=?,cpf=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,rg=?,emergencia=?,enfermeira_idEnf=?,medico_idMed=? where idPac=?";
         con.Connect();
         try {
             pst = con.conn.prepareStatement(query);
@@ -56,9 +60,13 @@ public class ControlPaciente {
             pst.setString(7, pac.getEndereco());
             pst.setString(8, pac.getRg());
             pst.setInt(9, pac.getEmergencia());
-            pst.setInt(10, id);
+            pst.setInt(10, pac.getEnfid());
+            pst.setInt(11, pac.getMedid());
+            pst.setInt(12, id);
 
             pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Alteração feita", "Alteração do dado do Paciente", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro durante a alteracao!", "Alteracao de Funcionario", JOptionPane.ERROR_MESSAGE);

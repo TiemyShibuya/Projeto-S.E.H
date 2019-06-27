@@ -13,9 +13,9 @@ public class Enfermeira {
     private String telefone;
     private String endereco;
     private String cargo;
+    private int permissao;
     private String usuario;
     private String senha;
-    private int permissao;
 
     public int getIdEnf() {
         return idEnf;
@@ -89,6 +89,14 @@ public class Enfermeira {
         this.cargo = cargo;
     }
 
+    public int getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
+    }
+
     public String getUsuario() {
         return usuario;
     }
@@ -105,11 +113,4 @@ public class Enfermeira {
         this.senha = senha;
     }
 
-    public int getPermissao() {
-        return permissao;
-    }
-
-    public void setPermissao(int permissao) {
-        this.permissao = permissao;
-    }
 }

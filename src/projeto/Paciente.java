@@ -14,6 +14,8 @@ public class Paciente {
     private String endereco;
     private String rg;
     private int emergencia;
+    private int enfermeira_idEnf;
+    private int medico_idMed;
 
     public int getIdPac() {
         return idPac;
@@ -93,6 +95,22 @@ public class Paciente {
 
     public void setEmergencia(int emergencia) {
         this.emergencia = emergencia;
+    }
+
+    public int getEnfid() {
+        return enfermeira_idEnf;
+    }
+
+    public void setEnfid(int enf) {
+        this.enfermeira_idEnf = enf;
+    }
+
+    public int getMedid() {
+        return medico_idMed;
+    }
+
+    public void setMedid(int med) {
+        this.medico_idMed = med;
     }
 
 }

@@ -1,52 +1,64 @@
 package view;
+
+import control.conexaoDB;
 import javax.swing.*;
-import control.conexaoBD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-/**
- *
- * @author Tiemy Shibuya
- */
+
 public class Login extends javax.swing.JFrame {
+
     /*Utilizado para fazer o controle do banco*/
-    /*rs manda as informações para o banco*/
+ /*rs manda as informações para o banco*/
     ResultSet rs = null;
+    ResultSet rs2 = null;
     /*pst pega os dados da tela*/
     PreparedStatement pst = null;
+    PreparedStatement pst2 = null;
     /*instanciando o banco*/
-    conexaoBD con = new conexaoBD();
-    
+    conexaoDB con = new conexaoDB();
+
     int permissao;
 
     public Login() {
         initComponents();
-        
+
     }
-    
-    private void login(){
+
+    private boolean login(int user) {
         /*o que estou passando para o banco*/
-        String query = "select * from funcionario where usuario=? and senha=?";
-        try{
+        String query;
+        if (user == 1) {
+            query = "select * from medico where usuario=? and senha=? ";
+        } else if (user == 2) {
+            query = "select * from medico where usuario=? and senha=? ";
+        } else {
+            query = "select * from enfermeira where usuario=? and senha=?";
+        }
+
+        try {
             pst = con.conn.prepareStatement(query);
+
             pst.setString(1, jTextFieldUsuario.getText());
-            pst.setString(2, jPasswordFieldSenha.getText());
-      
-            rs = pst.executeQuery();/*mandei p o banco as informações*/
+            pst.setString(2, String.valueOf(jPasswordFieldSenha.getPassword()));
+
+            /*mandei p o banco as informações*/
+            rs = pst.executeQuery();
+
             /*esperando a resposta*/
-            if(rs.next()){
+            if (rs.next()) {
                 permissao = rs.getInt("permissao");
                 //System.out.println(permissao);
                 /*se o usuário n existir no banco fecha a conexão com o banco p ele poder tentar de novo*/
-                try{
+                try {
                     pst.close();
                     rs.close();
                     con.Disconnect();
-                }catch(SQLException e){
-                    JOptionPane.showMessageDialog(null,"Falha na conexão","Falha",JOptionPane.ERROR_MESSAGE);                    
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
                 }
                 /*o usuário existe no banco*/
-                JOptionPane.showMessageDialog(null,"Bem vindo(a) : "+ jTextFieldUsuario.getText(),"Acessou",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Bem vindo(a) : " + jTextFieldUsuario.getText(), "Acessou", JOptionPane.INFORMATION_MESSAGE);
                 switch (permissao) {
                     case 1:
                         new TelaAdministrador(jTextFieldUsuario.getText()).setVisible(true);
@@ -57,32 +69,31 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();
                         break;
                     case 3:
-                        new TelaEnfermeira(jTextFieldUsuario.getText()).setVisible(true); 
+                        new TelaEnfermeira(jTextFieldUsuario.getText()).setVisible(true);
                         this.dispose();
                         break;
                     default:
-                        JOptionPane.showMessageDialog(null,"Você não tem permissão","Erro",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Você não tem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
                         break;
                 }
-                
-                
-            }else if(jTextFieldUsuario.getText().isEmpty() && jPasswordFieldSenha.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null,"Usuário e senha em branco","erro",JOptionPane.ERROR_MESSAGE);
-                
-            }else{
-                JOptionPane.showMessageDialog(null,"Usuário e senha incorretos","erro",JOptionPane.ERROR_MESSAGE);
+                return true;
+
+            } else if (jTextFieldUsuario.getText().isEmpty() && jPasswordFieldSenha.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Usuário e senha em branco", "erro", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                if (user == 3) {
+                    JOptionPane.showMessageDialog(null, "Usuário e senha incorretos", "erro", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
-            
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Falha na conexão","Falha",JOptionPane.ERROR_MESSAGE);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
         }
+        return false;
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -173,10 +184,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        if(con.status()==false){
-            JOptionPane.showMessageDialog(null,"banco de dados não conectado","Erro",JOptionPane.ERROR_MESSAGE);
-        }else{
-            login();
+        if (con.status() == false) {
+            JOptionPane.showMessageDialog(null, "banco de dados não conectado", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            boolean teste;
+            teste = login(1);
+            if (teste == false) {
+                teste = login(2);
+                if (teste == false) {
+                    login(3);
+                }
+            }
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -187,7 +205,7 @@ public class Login extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

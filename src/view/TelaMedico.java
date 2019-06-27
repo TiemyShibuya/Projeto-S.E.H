@@ -1,6 +1,6 @@
 package view;
 
-import control.conexaoBD;
+import control.conexaoDB;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * @author Tiemy Shibuya
  */
 public class TelaMedico extends javax.swing.JFrame {
-    conexaoBD con = new conexaoBD();
+    conexaoDB con = new conexaoDB();
 
     public TelaMedico(String usuario) {
         initComponents();

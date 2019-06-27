@@ -1,4 +1,5 @@
 package view;
+
 /**
  *
  * @author Tiemy Shibuya
@@ -7,12 +8,13 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPerfilFuncionario
+     *
      * @param usuario
      */
     public TelaPerfilFuncionario(String usuario) {
         initComponents();
         jLabelNome.setText(usuario);
-        
+
     }
 
     /**
@@ -29,13 +31,10 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         jLabelNome = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
         jLabelNomeC = new javax.swing.JLabel();
-        jTextFieldCPF = new javax.swing.JTextField();
         jLabelCPF = new javax.swing.JLabel();
         jTextFieldNomeC = new javax.swing.JTextField();
         jLabelTel = new javax.swing.JLabel();
-        jTextFieldTel = new javax.swing.JTextField();
         jLabelRG = new javax.swing.JLabel();
-        jTextFieldRG = new javax.swing.JTextField();
         jLabelSexo = new javax.swing.JLabel();
         jLabelEnd = new javax.swing.JLabel();
         jTextFieldEnd = new javax.swing.JTextField();
@@ -46,6 +45,9 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         jLabelCargoFunc = new javax.swing.JLabel();
         jPanelFundoSuperior = new javax.swing.JPanel();
         jLabelPerfilFunc = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextField3 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -81,16 +83,6 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         getContentPane().add(jLabelNomeC);
         jLabelNomeC.setBounds(200, 130, 130, 20);
 
-        jTextFieldCPF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldCPF.setText(" ____.____.____-__");
-        jTextFieldCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCPFActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldCPF);
-        jTextFieldCPF.setBounds(200, 240, 220, 30);
-
         jLabelCPF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCPF.setText("CPF:");
         getContentPane().add(jLabelCPF);
@@ -103,17 +95,10 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         getContentPane().add(jLabelTel);
         jLabelTel.setBounds(200, 290, 100, 20);
 
-        jTextFieldTel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldTel.setText("( )____-_____");
-        getContentPane().add(jTextFieldTel);
-        jTextFieldTel.setBounds(200, 320, 220, 30);
-
         jLabelRG.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelRG.setText("RG:");
         getContentPane().add(jLabelRG);
         jLabelRG.setBounds(510, 130, 40, 22);
-        getContentPane().add(jTextFieldRG);
-        jTextFieldRG.setBounds(510, 160, 200, 30);
 
         jLabelSexo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelSexo.setText("Sexo:");
@@ -172,13 +157,36 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         getContentPane().add(jPanelFundoSuperior);
         jPanelFundoSuperior.setBounds(0, 0, 780, 30);
 
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextField1);
+        jFormattedTextField1.setBounds(200, 230, 220, 30);
+
+        try {
+            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextField2);
+        jFormattedTextField2.setBounds(200, 330, 220, 30);
+
+        try {
+            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextField3);
+        jFormattedTextField3.setBounds(519, 160, 200, 28);
+
         setSize(new java.awt.Dimension(798, 613));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCPFActionPerformed
 
     private void jCheckBoxFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFemininoActionPerformed
         // TODO add your handling code here:
@@ -189,15 +197,17 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-       
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JCheckBox jCheckBoxFeminino;
     private javax.swing.JCheckBox jCheckBoxMasculino;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelCargoFunc;
@@ -211,10 +221,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JPanel jPanelFundoLateral;
     private javax.swing.JPanel jPanelFundoSuperior;
-    private javax.swing.JTextField jTextFieldCPF;
     private javax.swing.JTextField jTextFieldEnd;
     private javax.swing.JTextField jTextFieldNomeC;
-    private javax.swing.JTextField jTextFieldRG;
-    private javax.swing.JTextField jTextFieldTel;
     // End of variables declaration//GEN-END:variables
 }

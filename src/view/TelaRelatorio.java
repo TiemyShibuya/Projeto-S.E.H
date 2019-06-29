@@ -112,7 +112,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(107, 0, 100, 100);
+        jPanel1.setBounds(107, 0, 0, 0);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -139,9 +139,10 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         jButton1.setText("IMPRIMIR");
         getContentPane().add(jButton1);
-        jButton1.setBounds(150, 490, 140, 25);
+        jButton1.setBounds(150, 490, 140, 23);
 
-        pack();
+        setSize(new java.awt.Dimension(710, 605));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -151,7 +152,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

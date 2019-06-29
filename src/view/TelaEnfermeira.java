@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import projeto.Medico;
-
 import net.proteanit.sql.DbUtils;
 
 public class TelaEnfermeira extends javax.swing.JFrame {
@@ -22,18 +21,47 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         jLabelNomeEnfermeira.setText(usuario);
     }
 
-    public void ListarMedico(Medico med) {
-        String query = "select id,nome,especialidade from medico where nome=?";
-        con.Connect();
+    public void ListarMedico() {
+
+        String query = "select * from medico order by idMed Asc";
+
+        try {
+
+            pst = con.conn.prepareStatement(query);
+            rs = pst.executeQuery();
+            jTableMedico.setModel(DbUtils.resultSetToTableModel(rs));
+
+            jTableMedico.getColumnModel().getColumn(0).setHeaderValue("ID");
+            jTableMedico.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            jTableMedico.getColumnModel().getColumn(2).setHeaderValue("Especialidade");
+            //jTableMedico.getColumnModel().getColumn(3).setHeaderValue("Cargo");
+            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            jTableMedico.getTableHeader().resizeAndRepaint();
+
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void PesquisarMedico() {
+        String query = "select * from medico where nome like ?";
 
         try {
             pst = con.conn.prepareStatement(query);
-            pst.setString(1, jFormattedTextFieldNome.getText());
+            pst.setString(1, jFormattedTextFieldNome.getText() + "%");
             rs = pst.executeQuery();
-
             jTableMedico.setModel(DbUtils.resultSetToTableModel(rs));
+
+            jTableMedico.getColumnModel().getColumn(0).setHeaderValue("ID");
+            jTableMedico.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            jTableMedico.getColumnModel().getColumn(2).setHeaderValue("Especialidade");
+            //jTableMedico.getColumnModel().getColumn(3).setHeaderValue("Cargo");
+            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            jTableMedico.getTableHeader().resizeAndRepaint();
         } catch (SQLException error) {
-            JOptionPane.showMessageDialog(null, "Nao foi possivel listar dados!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -42,7 +70,6 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButtonAjuda = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jButtonSair = new javax.swing.JButton();
         jButtonMensagem = new javax.swing.JButton();
@@ -60,16 +87,6 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jToggleButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ajuda.png"))); // NOI18N
-        jToggleButtonAjuda.setText("Ajuda & Sobre");
-        jToggleButtonAjuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonAjudaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jToggleButtonAjuda);
-        jToggleButtonAjuda.setBounds(10, 170, 140, 40);
 
         jToggleButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/perfil.png"))); // NOI18N
@@ -181,7 +198,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         new TelaPerfilFuncionario(jLabelNomeEnfermeira.getText()).setVisible(true);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -195,16 +212,12 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         new TelaMensagem().setVisible(true);
     }//GEN-LAST:event_jButtonMensagemActionPerformed
 
-    private void jToggleButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAjudaActionPerformed
-        new TelaAjuda().setVisible(true);
-    }//GEN-LAST:event_jToggleButtonAjudaActionPerformed
-
     private void jToggleButtonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPacienteActionPerformed
         new TelaCadastroPaciente().setVisible(true);
     }//GEN-LAST:event_jToggleButtonPacienteActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        ListarMedico(med);
+        ListarMedico();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jFormattedTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNomeActionPerformed
@@ -214,7 +227,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     private void jFormattedTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNomeKeyPressed
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            ListarMedico(med);
+            PesquisarMedico();
 
         }
     }//GEN-LAST:event_jFormattedTextFieldNomeKeyPressed
@@ -232,7 +245,6 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButtonAjuda;
     private javax.swing.JToggleButton jToggleButtonPaciente;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Login extends javax.swing.JFrame {
 
@@ -25,7 +27,7 @@ public class Login extends javax.swing.JFrame {
 
     }
 
-    private boolean login(int user) {
+    private boolean login(int user) throws ClassNotFoundException {
         /*o que estou passando para o banco*/
         String query;
         if (user == 1) {
@@ -187,12 +189,24 @@ public class Login extends javax.swing.JFrame {
         if (con.status() == false) {
             JOptionPane.showMessageDialog(null, "banco de dados não conectado", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
-            boolean teste;
-            teste = login(1);
+            boolean teste = false;
+            try {
+                teste = login(1);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if (teste == false) {
-                teste = login(2);
+                try {
+                    teste = login(2);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (teste == false) {
-                    login(3);
+                    try {
+                        login(3);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

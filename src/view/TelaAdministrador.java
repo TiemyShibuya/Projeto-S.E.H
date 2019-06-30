@@ -4,6 +4,8 @@ import control.conexaoDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import projeto.Enfermeira;
@@ -17,14 +19,17 @@ public class TelaAdministrador extends javax.swing.JFrame {
     Medico med = new Medico();
     Enfermeira en = new Enfermeira();
 
-    public TelaAdministrador(String usuario) {
+    public TelaAdministrador(String usuario) throws ClassNotFoundException {
         initComponents();
         jLabelNomeAdmin.setText(usuario);
+        con.Connect();
+        listarFuncionario();
+        listarEnfermeira();
     }
 
     public void listarFuncionario() throws ClassNotFoundException {
 
-        String query = "select * from medico order by idMed Asc";
+        String query = "select nome,cpf,telefone,especialidade from medico order by idMed Asc";
 
         try {
 
@@ -35,8 +40,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
             jTableNome.getColumnModel().getColumn(0).setHeaderValue("Nome");
             jTableNome.getColumnModel().getColumn(1).setHeaderValue("CPF");
             jTableNome.getColumnModel().getColumn(2).setHeaderValue("Telefone");
-            jTableNome.getColumnModel().getColumn(3).setHeaderValue("Cargo");
-            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            jTableNome.getColumnModel().getColumn(3).setHeaderValue("Especialidade");
             jTableNome.getTableHeader().resizeAndRepaint();
 
         } catch (SQLException error) {
@@ -46,7 +50,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }
 
     public void pesquisarFuncionario() {
-        String query = "select * from medico where nome like ?";
+        String query = "select nome,cpf,telefone,especialidade from medico where nome like ?";
 
         try {
             pst = con.conn.prepareStatement(query);
@@ -58,8 +62,53 @@ public class TelaAdministrador extends javax.swing.JFrame {
             jTableNome.getColumnModel().getColumn(1).setHeaderValue("CPF");
             jTableNome.getColumnModel().getColumn(2).setHeaderValue("Telefone");
             jTableNome.getColumnModel().getColumn(3).setHeaderValue("Cargo");
-            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+
             jTableNome.getTableHeader().resizeAndRepaint();
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public void listarEnfermeira() throws ClassNotFoundException {
+
+        String query = "select nome,cpf,telefone,cargo from enfermeira order by idEnf Asc";
+
+        try {
+
+            pst = con.conn.prepareStatement(query);
+            rs = pst.executeQuery();
+            jTableEnf.setModel(DbUtils.resultSetToTableModel(rs));
+
+            jTableEnf.getColumnModel().getColumn(0).setHeaderValue("Nome");
+            jTableEnf.getColumnModel().getColumn(1).setHeaderValue("CPF");
+            jTableEnf.getColumnModel().getColumn(2).setHeaderValue("Telefone");
+            jTableEnf.getColumnModel().getColumn(3).setHeaderValue("Cargo");
+
+            jTableEnf.getTableHeader().resizeAndRepaint();
+
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void pesquisarEnfermeira() {
+        String query = "select * from enfermeira where nome like ?";
+
+        try {
+            pst = con.conn.prepareStatement(query);
+            pst.setString(1, jTextFieldNomeEnf.getText() + "%");
+            rs = pst.executeQuery();
+            jTableEnf.setModel(DbUtils.resultSetToTableModel(rs));
+
+            jTableEnf.getColumnModel().getColumn(0).setHeaderValue("Nome");
+            jTableEnf.getColumnModel().getColumn(1).setHeaderValue("CPF");
+            jTableEnf.getColumnModel().getColumn(2).setHeaderValue("Telefone");
+            jTableEnf.getColumnModel().getColumn(3).setHeaderValue("Cargo");
+            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            jTableEnf.getTableHeader().resizeAndRepaint();
         } catch (SQLException error) {
 
             JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
@@ -90,6 +139,11 @@ public class TelaAdministrador extends javax.swing.JFrame {
         jLabelNomeAdmin = new javax.swing.JLabel();
         jLabelFotoAdmin = new javax.swing.JLabel();
         jPanelFundoSuperior = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldNomeEnf = new javax.swing.JTextField();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEnf = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -150,7 +204,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonMedico);
-        jButtonMedico.setBounds(230, 120, 60, 60);
+        jButtonMedico.setBounds(250, 100, 60, 60);
 
         jButtonPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
         jButtonPaciente.setToolTipText("Paciente");
@@ -160,7 +214,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonPaciente);
-        jButtonPaciente.setBounds(480, 120, 60, 60);
+        jButtonPaciente.setBounds(430, 100, 60, 60);
 
         jButtonRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/relatorio.png"))); // NOI18N
         jButtonRelatorio.setToolTipText("Relatório");
@@ -170,7 +224,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonRelatorio);
-        jButtonRelatorio.setBounds(650, 120, 60, 60);
+        jButtonRelatorio.setBounds(610, 100, 60, 60);
 
         jTableNome.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,7 +240,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableNome);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(210, 360, 460, 90);
+        jScrollPane1.setBounds(210, 280, 460, 90);
 
         jFormattedTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +248,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jFormattedTextFieldNome);
-        jFormattedTextFieldNome.setBounds(210, 320, 280, 30);
+        jFormattedTextFieldNome.setBounds(210, 230, 280, 30);
 
         jToggleButtonPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         jToggleButtonPesquisar.setText(" Pesquisar");
@@ -204,27 +258,27 @@ public class TelaAdministrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButtonPesquisar);
-        jToggleButtonPesquisar.setBounds(510, 320, 120, 25);
+        jToggleButtonPesquisar.setBounds(520, 225, 120, 30);
 
         jLabelCadastrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCadastrar.setText("Cadastrar:");
         getContentPane().add(jLabelCadastrar);
-        jLabelCadastrar.setBounds(220, 80, 70, 14);
+        jLabelCadastrar.setBounds(250, 70, 70, 14);
 
         jLabelPesquisar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelPesquisar.setText("Pesquisar funcionário:");
+        jLabelPesquisar.setText("Pesquisar Médico:");
         getContentPane().add(jLabelPesquisar);
-        jLabelPesquisar.setBounds(210, 280, 180, 30);
+        jLabelPesquisar.setBounds(210, 190, 180, 30);
 
         jLabelPacientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPacientes.setText("Pacientes:");
         getContentPane().add(jLabelPacientes);
-        jLabelPacientes.setBounds(470, 80, 70, 17);
+        jLabelPacientes.setBounds(420, 70, 70, 17);
 
         jLabelRelatorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelRelatorio.setText("Relatório:");
         getContentPane().add(jLabelRelatorio);
-        jLabelRelatorio.setBounds(640, 80, 80, 17);
+        jLabelRelatorio.setBounds(600, 70, 80, 17);
 
         jPanelFundoLateral.setBackground(new java.awt.Color(0, 0, 153));
         jPanelFundoLateral.setLayout(null);
@@ -246,7 +300,40 @@ public class TelaAdministrador extends javax.swing.JFrame {
         getContentPane().add(jPanelFundoSuperior);
         jPanelFundoSuperior.setBounds(0, 0, 800, 30);
 
-        setSize(new java.awt.Dimension(816, 630));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Pesquisar Enfermeira:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(220, 390, 190, 22);
+        getContentPane().add(jTextFieldNomeEnf);
+        jTextFieldNomeEnf.setBounds(220, 430, 290, 30);
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
+        jToggleButton1.setText("Pesquisar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jToggleButton1);
+        jToggleButton1.setBounds(530, 423, 130, 30);
+
+        jTableEnf.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableEnf);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(220, 470, 452, 90);
+
+        setSize(new java.awt.Dimension(816, 627));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -268,6 +355,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
 
     private void jToggleButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPesquisarActionPerformed
         // TODO add your handling code here:
+        pesquisarFuncionario();
     }//GEN-LAST:event_jToggleButtonPesquisarActionPerformed
 
     private void jButtonMedicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMedicoMouseEntered
@@ -284,8 +372,14 @@ public class TelaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMensagemActionPerformed
 
     private void jToggleButtonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPerfilActionPerformed
-        new TelaPerfilFuncionario(jLabelNomeAdmin.getText()).setVisible(true);
-        //this.dispose();
+        try {
+            new TelaPerfilFuncionario(jLabelNomeAdmin.getText()).setVisible(true);
+            //this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jToggleButtonPerfilActionPerformed
 
     private void jButtonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPacienteActionPerformed
@@ -297,8 +391,13 @@ public class TelaAdministrador extends javax.swing.JFrame {
     private void jButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelatorioActionPerformed
 
         new TelaRelatorio().setVisible(true);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jButtonRelatorioActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        pesquisarEnfermeira();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMedico;
@@ -307,6 +406,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRelatorio;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JFormattedTextField jFormattedTextFieldNome;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAdministrador;
     private javax.swing.JLabel jLabelCadastrar;
     private javax.swing.JLabel jLabelFotoAdmin;
@@ -317,7 +417,11 @@ public class TelaAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelFundoLateral;
     private javax.swing.JPanel jPanelFundoSuperior;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableEnf;
     private javax.swing.JTable jTableNome;
+    private javax.swing.JTextField jTextFieldNomeEnf;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButtonPerfil;
     private javax.swing.JToggleButton jToggleButtonPesquisar;
     // End of variables declaration//GEN-END:variables

@@ -1,20 +1,115 @@
 package view;
 
 import control.conexaoDB;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
     conexaoDB con = new conexaoDB();
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    String id;
+    String user;
 
-    public TelaPerfilFuncionario(String usuario) {
+    public TelaPerfilFuncionario(String usuario) throws ClassNotFoundException, SQLException {
+        user = usuario;
         initComponents();
         jLabelNome.setText(usuario);
+        con.Connect();
+        boolean teste = false;
+        teste = Mostrar(1);
+        if (teste == false) {
+            teste = Mostrar(2);
+        }
 
     }
 
     public void VoltarTela() {
         //con.Disconnect();
         this.dispose();
+    }
+
+    public boolean Mostrar(int aux) throws SQLException {
+        //System.out.println(user);
+        String query;
+        if (aux == 1) {
+            query = "select * from medico where usuario = '" + user + "'";
+            try {
+                pst = con.conn.prepareStatement(query);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    jTextFieldNomeC.setText(rs.getString("nome"));
+                    jFormattedTextFieldCpf.setText(rs.getString("cpf"));
+                    jTextFieldSexo.setText(rs.getString("sexo"));
+                    jTextFieldIdade.setText(rs.getString("idade"));
+                    jFormattedTextFieldDt.setText(rs.getString("dataNasc"));
+                    jFormattedTextFieldTel.setText(rs.getString("telefone"));
+                    jTextFieldEnd.setText(rs.getString("endereco"));
+                    jTextFieldESp.setText(rs.getString("especialidade"));
+                    jTextFieldUser.setText(rs.getString("usuario"));
+                    jPasswordFieldSenha.setText(rs.getString("senha"));
+
+                }
+
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (aux == 2) {
+            query = "select * from enfermeira where usuario = '" + user + "'";
+
+            try {
+                pst = con.conn.prepareStatement(query);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    jTextFieldNomeC.setText(rs.getString("nome"));
+                    jFormattedTextFieldCpf.setText(rs.getString("cpf"));
+                    jTextFieldSexo.setText(rs.getString("sexo"));
+                    jTextFieldIdade.setText(rs.getString("idade"));
+                    jFormattedTextFieldDt.setText(rs.getString("data"));
+                    jFormattedTextFieldTel.setText(rs.getString("telefone"));
+                    jTextFieldEnd.setText(rs.getString("endereco"));
+                    jTextFieldESp.setText(rs.getString("cargo"));
+                    jTextFieldUser.setText(rs.getString("usuario"));
+                    jPasswordFieldSenha.setText(rs.getString("senha"));
+                }
+
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return false;
+
+    }
+
+    public void UpdatePerfil() throws SQLException, ClassNotFoundException {
+        String query = "update medico set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,especialidade=?,usuario=?,senha=? where idMed=?";
+
+        try {
+
+            pst = con.conn.prepareStatement(query);
+            pst.setString(1, jTextFieldNomeC.getText());
+            pst.setString(2, jFormattedTextFieldCpf.getText());
+            pst.setString(3, jTextFieldSexo.getText());
+            pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
+            pst.setDate(5, Date.valueOf(jFormattedTextFieldDt.getText()));
+            pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
+            pst.setString(7, jTextFieldEnd.getText());
+            pst.setString(8, jTextFieldESp.getText());
+            pst.setString(9, jTextFieldUser.getText());
+            pst.setString(10, jPasswordFieldSenha.getText());
+            pst.setInt(11, Integer.parseInt(id));
+
+            pst.executeUpdate();
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 
@@ -30,20 +125,27 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         jLabelCPF = new javax.swing.JLabel();
         jTextFieldNomeC = new javax.swing.JTextField();
         jLabelTel = new javax.swing.JLabel();
-        jLabelRG = new javax.swing.JLabel();
         jLabelSexo = new javax.swing.JLabel();
         jLabelEnd = new javax.swing.JLabel();
         jTextFieldEnd = new javax.swing.JTextField();
         jLabelCargo = new javax.swing.JLabel();
         jButtonSalvar = new javax.swing.JButton();
-        jCheckBoxFeminino = new javax.swing.JCheckBox();
-        jCheckBoxMasculino = new javax.swing.JCheckBox();
         jLabelCargoFunc = new javax.swing.JLabel();
         jPanelFundoSuperior = new javax.swing.JPanel();
         jLabelPerfilFunc = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCpf = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldTel = new javax.swing.JFormattedTextField();
+        jTextFieldSexo = new javax.swing.JTextField();
+        jLabelData = new javax.swing.JLabel();
+        jFormattedTextFieldDt = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldESp = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldUser = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldIdade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -77,36 +179,31 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         jLabelNomeC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelNomeC.setText("Nome completo:");
         getContentPane().add(jLabelNomeC);
-        jLabelNomeC.setBounds(200, 130, 130, 20);
+        jLabelNomeC.setBounds(190, 120, 130, 20);
 
         jLabelCPF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCPF.setText("CPF:");
         getContentPane().add(jLabelCPF);
-        jLabelCPF.setBounds(200, 200, 50, 30);
+        jLabelCPF.setBounds(190, 190, 50, 30);
         getContentPane().add(jTextFieldNomeC);
-        jTextFieldNomeC.setBounds(200, 160, 220, 30);
+        jTextFieldNomeC.setBounds(190, 150, 220, 30);
 
         jLabelTel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTel.setText("Telefone:");
         getContentPane().add(jLabelTel);
-        jLabelTel.setBounds(200, 290, 100, 20);
-
-        jLabelRG.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelRG.setText("RG:");
-        getContentPane().add(jLabelRG);
-        jLabelRG.setBounds(510, 130, 40, 22);
+        jLabelTel.setBounds(190, 270, 100, 20);
 
         jLabelSexo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelSexo.setText("Sexo:");
         getContentPane().add(jLabelSexo);
-        jLabelSexo.setBounds(510, 220, 50, 22);
+        jLabelSexo.setBounds(500, 120, 50, 22);
 
         jLabelEnd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelEnd.setText("Endereço:");
         getContentPane().add(jLabelEnd);
-        jLabelEnd.setBounds(200, 380, 100, 20);
+        jLabelEnd.setBounds(190, 340, 100, 20);
         getContentPane().add(jTextFieldEnd);
-        jTextFieldEnd.setBounds(200, 410, 280, 30);
+        jTextFieldEnd.setBounds(190, 370, 280, 30);
 
         jLabelCargo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCargo.setText("Cargo:");
@@ -121,21 +218,6 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonSalvar);
         jButtonSalvar.setBounds(730, 530, 40, 40);
-
-        jCheckBoxFeminino.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jCheckBoxFeminino.setText("Feminino");
-        jCheckBoxFeminino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxFemininoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBoxFeminino);
-        jCheckBoxFeminino.setBounds(540, 250, 100, 27);
-
-        jCheckBoxMasculino.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jCheckBoxMasculino.setText("Masculino");
-        getContentPane().add(jCheckBoxMasculino);
-        jCheckBoxMasculino.setBounds(540, 280, 120, 27);
 
         jLabelCargoFunc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCargoFunc.setText("Cargo do funcionário");
@@ -154,70 +236,125 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
         jPanelFundoSuperior.setBounds(0, 0, 780, 30);
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            jFormattedTextFieldCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(200, 230, 220, 30);
+        jFormattedTextFieldCpf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextFieldCpf);
+        jFormattedTextFieldCpf.setBounds(190, 220, 220, 30);
 
         try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            jFormattedTextFieldTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jFormattedTextField2);
-        jFormattedTextField2.setBounds(200, 330, 220, 30);
+        jFormattedTextFieldTel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextFieldTel);
+        jFormattedTextFieldTel.setBounds(190, 300, 220, 30);
+        getContentPane().add(jTextFieldSexo);
+        jTextFieldSexo.setBounds(500, 150, 90, 30);
+
+        jLabelData.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelData.setText("Data Nascimento:");
+        getContentPane().add(jLabelData);
+        jLabelData.setBounds(500, 190, 140, 22);
 
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###")));
+            jFormattedTextFieldDt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jFormattedTextField3);
-        jFormattedTextField3.setBounds(519, 160, 200, 28);
+        jFormattedTextFieldDt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(jFormattedTextFieldDt);
+        jFormattedTextFieldDt.setBounds(500, 220, 220, 30);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Especialidade:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(190, 410, 130, 22);
+        getContentPane().add(jTextFieldESp);
+        jTextFieldESp.setBounds(190, 440, 230, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Usuário: ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(500, 270, 80, 22);
+        getContentPane().add(jTextFieldUser);
+        jTextFieldUser.setBounds(500, 300, 210, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Senha: ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(500, 340, 80, 22);
+        getContentPane().add(jPasswordFieldSenha);
+        jPasswordFieldSenha.setBounds(500, 370, 200, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Idade:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(640, 120, 60, 22);
+
+        jTextFieldIdade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdadeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldIdade);
+        jTextFieldIdade.setBounds(650, 150, 50, 30);
 
         setSize(new java.awt.Dimension(798, 613));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBoxFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFemininoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxFemininoActionPerformed
-
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            UpdatePerfil();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPerfilFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaPerfilFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         VoltarTela();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
+    private void jTextFieldIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdadeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JCheckBox jCheckBoxFeminino;
-    private javax.swing.JCheckBox jCheckBoxMasculino;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCpf;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDt;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelCargoFunc;
+    private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelEnd;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNomeC;
     private javax.swing.JLabel jLabelPerfil;
     private javax.swing.JLabel jLabelPerfilFunc;
-    private javax.swing.JLabel jLabelRG;
     private javax.swing.JLabel jLabelSexo;
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JPanel jPanelFundoLateral;
     private javax.swing.JPanel jPanelFundoSuperior;
+    private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JTextField jTextFieldESp;
     private javax.swing.JTextField jTextFieldEnd;
+    private javax.swing.JTextField jTextFieldIdade;
     private javax.swing.JTextField jTextFieldNomeC;
+    private javax.swing.JTextField jTextFieldSexo;
+    private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
 }

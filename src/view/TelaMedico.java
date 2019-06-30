@@ -4,6 +4,8 @@ import control.conexaoDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import projeto.Paciente;
@@ -176,8 +178,14 @@ public class TelaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        new TelaPerfilFuncionario(jLabelNomedoMedico.getText()).setVisible(true);
-        //this.dispose();
+        try {
+            new TelaPerfilFuncionario(jLabelNomedoMedico.getText()).setVisible(true);
+            //this.dispose();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaMedico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButtonMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMensagemActionPerformed

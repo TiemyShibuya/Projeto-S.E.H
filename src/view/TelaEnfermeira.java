@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import projeto.Medico;
 import net.proteanit.sql.DbUtils;
@@ -16,14 +18,18 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     ResultSet rs = null;
     Medico med = new Medico();
 
-    public TelaEnfermeira(String usuario) {
+    public TelaEnfermeira(String usuario) throws ClassNotFoundException {
         initComponents();
         jLabelNomeEnfermeira.setText(usuario);
+        con.Connect();
+        ListarMedico();
+
     }
 
-    public void ListarMedico() {
+    public void ListarMedico() throws ClassNotFoundException {
+        System.out.println("aqui");
 
-        String query = "select * from medico order by idMed Asc";
+        String query = "select idMed,nome,especialidade from medico order by idMed Asc";
 
         try {
 
@@ -34,8 +40,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
             jTableMedico.getColumnModel().getColumn(0).setHeaderValue("ID");
             jTableMedico.getColumnModel().getColumn(1).setHeaderValue("Nome");
             jTableMedico.getColumnModel().getColumn(2).setHeaderValue("Especialidade");
-            //jTableMedico.getColumnModel().getColumn(3).setHeaderValue("Cargo");
-            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+
             jTableMedico.getTableHeader().resizeAndRepaint();
 
         } catch (SQLException error) {
@@ -45,7 +50,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     }
 
     public void PesquisarMedico() {
-        String query = "select * from medico where nome like ?";
+        String query = "select idMed,nome,especialidade from medico where nome like ?";
 
         try {
             pst = con.conn.prepareStatement(query);
@@ -56,8 +61,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
             jTableMedico.getColumnModel().getColumn(0).setHeaderValue("ID");
             jTableMedico.getColumnModel().getColumn(1).setHeaderValue("Nome");
             jTableMedico.getColumnModel().getColumn(2).setHeaderValue("Especialidade");
-            //jTableMedico.getColumnModel().getColumn(3).setHeaderValue("Cargo");
-            //jTableNome.getColumnModel().getColumn(4).setHeaderValue("Marca");
+
             jTableMedico.getTableHeader().resizeAndRepaint();
         } catch (SQLException error) {
 
@@ -83,6 +87,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -138,11 +143,11 @@ public class TelaEnfermeira extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButtonPaciente);
-        jToggleButtonPaciente.setBounds(240, 90, 60, 60);
+        jToggleButtonPaciente.setBounds(260, 90, 60, 60);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rel.png"))); // NOI18N
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(350, 90, 60, 60);
+        jToggleButton1.setBounds(580, 90, 60, 60);
 
         jTableMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,7 +186,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton3);
-        jToggleButton3.setBounds(490, 320, 100, 30);
+        jToggleButton3.setBounds(490, 320, 120, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Pesquisar médico de plantão:");
@@ -192,19 +197,30 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 180, 570);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Cadastrar Paciente:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(220, 50, 160, 22);
+
         setSize(new java.awt.Dimension(794, 610));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        new TelaPerfilFuncionario(jLabelNomeEnfermeira.getText()).setVisible(true);
-        //this.dispose();
+        try {
+            new TelaPerfilFuncionario(jLabelNomeEnfermeira.getText()).setVisible(true);
+            //this.dispose();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
 
         JOptionPane.showMessageDialog(null, "Você vai sair", "logout", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+        this.dispose();
         new Login().setVisible(true);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
@@ -213,11 +229,14 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMensagemActionPerformed
 
     private void jToggleButtonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPacienteActionPerformed
+        //System.out.println("aqui");
         new TelaCadastroPaciente().setVisible(true);
+
     }//GEN-LAST:event_jToggleButtonPacienteActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        ListarMedico();
+        //ListarMedico();
+        PesquisarMedico();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jFormattedTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNomeActionPerformed
@@ -227,7 +246,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     private void jFormattedTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNomeKeyPressed
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            PesquisarMedico();
+            // PesquisarMedico();
 
         }
     }//GEN-LAST:event_jFormattedTextFieldNomeKeyPressed
@@ -237,6 +256,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JFormattedTextField jFormattedTextFieldNome;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFotoEnfermeira;
     private javax.swing.JLabel jLabelNomeEnfermeira;
     private javax.swing.JPanel jPanel1;

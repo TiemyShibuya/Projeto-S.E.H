@@ -1,45 +1,47 @@
 package view;
 
-import control.ControlFicha;
-import control.ControlPaciente;
 import control.conexaoDB;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import projeto.Ficha;
-import projeto.Paciente;
 
 public class TelaCadastroPaciente extends javax.swing.JFrame {
 
     conexaoDB con = new conexaoDB();
     PreparedStatement pst = null;
     ResultSet rs = null;
-    int emergencia;
 
     public TelaCadastroPaciente() {
         initComponents();
 
     }
 
+    public void VoltarTela() {
+        //con.Disconnect();
+        this.dispose();
+    }
+
     public void CadastrarPaciente() {
+        //System.out.println("aqui");
         String query = "insert into paciente(nome,cpf,sexo,idade,dataNasc,telefone,endereco,rg,emergencia) values(?,?,?,?,?,?,?,?,?)";
         con.Connect();
 
         try {
+            System.out.println("try");
             pst = con.conn.prepareStatement(query);
             pst.setString(1, jTextFieldNome.getText());
             pst.setString(2, jTextFieldcpf.getText());
             pst.setString(3, jTextFieldSexo.getText());
             pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
-            pst.setDate(5, Date.valueOf(jTextFieldData.getText()));
+            pst.setDate(5, new java.sql.Date(jTextFieldData.getDate()));
             pst.setInt(6, Integer.parseInt(jTextFieldTel.getText()));
             pst.setString(7, jTextFieldEnd.getText());
             pst.setString(8, jFormattedTextFieldRG.getText());
             pst.setInt(9, Integer.parseInt(jTextFieldEme.getText()));
 
-            rs = pst.executeQuery();
+            pst.executeQuery();
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
@@ -74,8 +76,6 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldIdade = new javax.swing.JTextField();
         jTextFieldcpf = new javax.swing.JTextField();
@@ -87,14 +87,11 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jFormattedTextFieldRG = new javax.swing.JFormattedTextField();
         jTextFieldSexo = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        jLabelTipo = new javax.swing.JLabel();
         jTextFieldEme = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
@@ -137,26 +134,13 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         getContentPane().add(jLabel13);
         jLabel13.setBounds(550, 150, 80, 22);
 
-        jCheckBox1.setText("F");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(760, 40, 40, 23);
-
-        jCheckBox2.setText("M");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(800, 40, 60, 23);
-
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNomeActionPerformed(evt);
             }
         });
         getContentPane().add(jTextFieldNome);
-        jTextFieldNome.setBounds(310, 100, 170, 30);
+        jTextFieldNome.setBounds(310, 100, 190, 30);
         getContentPane().add(jTextFieldIdade);
         jTextFieldIdade.setBounds(310, 150, 70, 30);
 
@@ -186,6 +170,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jLabel16.setBounds(360, 10, 340, 40);
 
         jButtonSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/relatorio.png"))); // NOI18N
         jButtonSalvar.setText("Ficha");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,12 +178,12 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonSalvar);
-        jButtonSalvar.setBounds(740, 650, 120, 30);
+        jButtonSalvar.setBounds(720, 510, 140, 50);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
         jPanel1.setLayout(null);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/nurse.jpeg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enfermeira.png"))); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(50, 120, 50, 60);
 
@@ -207,8 +192,19 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 190, 120, 14);
 
+        jToggleButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/seta.png"))); // NOI18N
+        jToggleButton1.setText("Voltar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton1);
+        jToggleButton1.setBounds(20, 540, 107, 30);
+
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 150, 700);
+        jPanel1.setBounds(0, 0, 150, 590);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("RG:");
@@ -226,36 +222,16 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         getContentPane().add(jTextFieldSexo);
         jTextFieldSexo.setBounds(640, 100, 90, 30);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("Tipo de emergência:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(250, 570, 170, 22);
-
-        jToggleButton1.setText("1");
-        getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(420, 490, 60, 50);
-
-        jToggleButton2.setText("2");
-        getContentPane().add(jToggleButton2);
-        jToggleButton2.setBounds(480, 490, 60, 50);
-
-        jToggleButton3.setText("3");
-        getContentPane().add(jToggleButton3);
-        jToggleButton3.setBounds(540, 490, 60, 50);
-
-        jToggleButton4.setText("4");
-        getContentPane().add(jToggleButton4);
-        jToggleButton4.setBounds(600, 490, 60, 50);
+        jLabelTipo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelTipo.setText("Tipo de emergência:");
+        getContentPane().add(jLabelTipo);
+        jLabelTipo.setBounds(240, 480, 170, 22);
         getContentPane().add(jTextFieldEme);
-        jTextFieldEme.setBounds(460, 570, 70, 30);
+        jTextFieldEme.setBounds(410, 470, 70, 40);
 
-        setSize(new java.awt.Dimension(909, 742));
+        setSize(new java.awt.Dimension(909, 630));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
@@ -266,8 +242,11 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         if (con.status() == false) {
             JOptionPane.showMessageDialog(null, "banco de dados não conectado", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
+
             CadastrarPaciente();
-            new TelaFicha(jTextFieldNome.getText()).setVisible(true);
+            System.out.println("aqui2");
+            new TelaFichaPaciente(jTextFieldNome.getText()).setVisible(true);
+            System.out.println("aqui3");
         }
         this.dispose();
 
@@ -281,6 +260,11 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldcpfActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        VoltarTela();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -288,8 +272,6 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JFormattedTextField jFormattedTextFieldRG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -302,8 +284,8 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTipo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldData;
     private javax.swing.JTextField jTextFieldEme;
@@ -314,8 +296,5 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTel;
     private javax.swing.JTextField jTextFieldcpf;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }

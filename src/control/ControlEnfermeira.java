@@ -15,7 +15,7 @@ public class ControlEnfermeira {
     ResultSet rs = null;
 
     public void Create(Enfermeira enf) {
-        String query = "insert into enfermeira (cpf,nome,sexo,idade,DataNasc,telefone,endereco,cargo,permissao,usuario,senha)values(?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "insert into enfermeira (cpf,nome,sexo,idade,dataNasc,telefone,endereco,cargo,permissao,usuario,senha)values(?,?,?,?,?,?,?,?,?,?,?)";
         con.Connect();
 
         try {
@@ -25,7 +25,7 @@ public class ControlEnfermeira {
             pst.setString(2, enf.getNome());
             pst.setString(3, enf.getSexo());
             pst.setInt(4, enf.getIdade());
-            pst.setDate(5, (Date) enf.getDataNasc());
+            pst.setString(5, enf.getDataNasc());
             pst.setString(6, enf.getTelefone());
             pst.setString(7, enf.getEndereco());
             pst.setString(8, enf.getCargo());
@@ -42,7 +42,7 @@ public class ControlEnfermeira {
     }
 
     public void Update(Enfermeira enf, int id) {
-        String query = "update enfermeira into nome=?,cpf=?,sexo=?,idade=?,DataNasc=?,telefone=?,endereco=?,cargo=?,permissao=?,usuario=?,senha=? where idEnf = ?";
+        String query = "update enfermeira into nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,cargo=?,permissao=?,usuario=?,senha=? where idEnf = ?";
         con.Connect();
 
         try {
@@ -52,7 +52,7 @@ public class ControlEnfermeira {
             pst.setString(2, enf.getCpf());
             pst.setString(3, enf.getSexo());
             pst.setInt(4, enf.getIdade());
-            pst.setDate(5, (Date) enf.getDataNasc());
+            pst.setString(5, enf.getDataNasc());
             pst.setString(6, enf.getTelefone());
             pst.setString(7, enf.getEndereco());
             pst.setString(8, enf.getCargo());

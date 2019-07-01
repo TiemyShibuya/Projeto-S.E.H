@@ -35,7 +35,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pst.setString(2, jTextFieldcpf.getText());
             pst.setString(3, jTextFieldSexo.getText());
             pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
-            pst.setDate(5, new java.sql.Date(jTextFieldData.getDate()));
+            pst.setString(5, jTextFieldData.getText());
             pst.setInt(6, Integer.parseInt(jTextFieldTel.getText()));
             pst.setString(7, jTextFieldEnd.getText());
             pst.setString(8, jFormattedTextFieldRG.getText());

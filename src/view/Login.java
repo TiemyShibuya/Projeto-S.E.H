@@ -107,8 +107,10 @@ public class Login extends javax.swing.JFrame {
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jLabelSenha = new javax.swing.JLabel();
         jLabelUsuário = new javax.swing.JLabel();
-        jLabelFundo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabelLOGO = new javax.swing.JLabel();
+        jLabelHospital = new javax.swing.JLabel();
+        jLabelseh = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -153,21 +155,35 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jPasswordFieldSenha);
         jPasswordFieldSenha.setBounds(310, 210, 160, 30);
 
+        jLabelSenha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabelSenha.setText("Senha:");
         getContentPane().add(jLabelSenha);
-        jLabelSenha.setBounds(260, 220, 50, 14);
+        jLabelSenha.setBounds(260, 220, 50, 15);
 
+        jLabelUsuário.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabelUsuário.setText("Usuário:");
         getContentPane().add(jLabelUsuário);
         jLabelUsuário.setBounds(260, 160, 60, 40);
 
-        jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo6.png"))); // NOI18N
-        getContentPane().add(jLabelFundo);
-        jLabelFundo.setBounds(0, 0, 390, 370);
+        jPanel1.setBackground(new java.awt.Color(169, 198, 249));
+        jPanel1.setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo6.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(370, 0, 150, 370);
+        jLabelLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.jpeg"))); // NOI18N
+        jPanel1.add(jLabelLOGO);
+        jLabelLOGO.setBounds(50, 100, 157, 110);
+
+        jLabelHospital.setFont(new java.awt.Font("UD Digi Kyokasho N-R", 0, 24)); // NOI18N
+        jLabelHospital.setText("HOSPITAL");
+        jPanel1.add(jLabelHospital);
+        jLabelHospital.setBounds(80, 220, 110, 30);
+
+        jLabelseh.setFont(new java.awt.Font("UD Digi Kyokasho N-R", 0, 24)); // NOI18N
+        jLabelseh.setText("S.E.H");
+        jPanel1.add(jLabelseh);
+        jLabelseh.setBounds(90, 240, 70, 50);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 520, 370);
 
         setSize(new java.awt.Dimension(533, 406));
         setLocationRelativeTo(null);
@@ -247,11 +263,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelFundo;
+    private javax.swing.JLabel jLabelHospital;
+    private javax.swing.JLabel jLabelLOGO;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JLabel jLabelUsuário;
+    private javax.swing.JLabel jLabelseh;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JToggleButton jToggleButton1;

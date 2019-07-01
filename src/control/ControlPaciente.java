@@ -1,6 +1,5 @@
 package control;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +25,7 @@ public class ControlPaciente {
             pst.setString(2, pac.getCpf());
             pst.setString(3, pac.getSexo());
             pst.setInt(4, pac.getIdade());
-            pst.setDate(5, (Date) pac.getDataNasc());
+            pst.setString(5, pac.getDataNasc());
             pst.setString(6, pac.getTelefone());
             pst.setString(7, pac.getEndereco());
             pst.setString(8, pac.getRg());
@@ -55,7 +54,7 @@ public class ControlPaciente {
             pst.setString(2, pac.getCpf());
             pst.setString(3, pac.getSexo());
             pst.setInt(4, pac.getIdade());
-            pst.setDate(5, (Date) pac.getDataNasc());
+            pst.setString(5, pac.getDataNasc());
             pst.setString(6, pac.getTelefone());
             pst.setString(7, pac.getEndereco());
             pst.setString(8, pac.getRg());

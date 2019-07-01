@@ -14,18 +14,19 @@ public class ControlFicha {
     ResultSet rs = null;
 
     public void Create(Ficha f) {
-        String query = "insert into ficha (peso,altura,alergia,descricao,tipoSG,medicamento,idPac) values(?,?,?,?,?,?,?)";
+        String query = "insert into ficha (Paciente_idPac,peso,altura,alergia,descricao,tipoSG,medicamento,date) values(?,?,?,?,?,?,?,?)";
         con.Connect();
         try {
             pst = con.conn.prepareStatement(query);
 
-            pst.setInt(1, f.getPeso());
-            pst.setInt(2, f.getAltura());
-            pst.setString(3, f.getAlergia());
-            pst.setString(4, f.getDescricao());
-            pst.setString(5, f.getTipoSanguineo());
-            pst.setString(6, f.getMedicamento());
-            pst.setInt(7, f.getIdpac());
+            pst.setInt(1, f.getIdpac());
+            pst.setInt(2, f.getPeso());
+            pst.setInt(3, f.getAltura());
+            pst.setString(4, f.getAlergia());
+            pst.setString(5, f.getDescricao());
+            pst.setString(6, f.getTipoSanguineo());
+            pst.setString(7, f.getMedicamento());
+            pst.setString(8, f.getData());
 
             pst.executeUpdate();
 
@@ -36,7 +37,7 @@ public class ControlFicha {
     }
 
     public void Update(Ficha f, int id) {
-        String query = "update ficha set peso=?,altura=?,alergia=?,descricao=?,tipoSG=?,medicamento=? where idPac=?";
+        String query = "update ficha set peso=?,altura=?,alergia=?,descricao=?,tipoSG=?,medicamento=?,data=? where idPac=?";
         con.Connect();
 
         try {
@@ -48,7 +49,8 @@ public class ControlFicha {
             pst.setString(4, f.getDescricao());
             pst.setString(5, f.getTipoSanguineo());
             pst.setString(6, f.getMedicamento());
-            pst.setInt(7, f.getIdpac());
+            pst.setString(6, f.getData());
+            //pst.setInt(7, f.getIdpac());
             pst.setInt(8, id);
 
             pst.execute();

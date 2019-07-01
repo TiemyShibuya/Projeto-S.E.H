@@ -1,18 +1,20 @@
 package view;
 
 import control.conexaoDB;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+import projeto.Ficha;
+import projeto.Paciente;
 
 public class TelaRelatorio extends javax.swing.JFrame {
 
     conexaoDB con = new conexaoDB();
     PreparedStatement pst = null;
     ResultSet rs = null;
+    Ficha f = new Ficha();
 
     public TelaRelatorio() {
         initComponents();
@@ -23,12 +25,12 @@ public class TelaRelatorio extends javax.swing.JFrame {
         this.dispose();
     }
 
-    public Paciente Atendimento(Paciente pac) {
+    public Paciente Atendimento(Ficha f) {
         String query = "select p.idPac,p.nome,p.emergencia from paciente p join ficha f on p.idPac=f.idPac where f.date=?";
 
         try {
             pst = con.conn.prepareStatement(query);
-            pac.setData(jFormattedTextFieldData.getDate());
+            f.setData(jFormattedTextFieldData.getText());
             //pst.setString(1, Date.valueOf(jFormattedTextFieldData.getText()) + "%");
             rs = pst.executeQuery();
             jTablePacientes.setModel(DbUtils.resultSetToTableModel(rs));
@@ -42,7 +44,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Nao foi possivel procurar funcionário!", "Falha no Banco", JOptionPane.ERROR_MESSAGE);
         }
-        return pac;
+        return f;
 
     }
 
@@ -226,7 +228,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        PesquisarMedico();
+        Atendimento(f);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed

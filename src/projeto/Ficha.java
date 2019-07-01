@@ -1,7 +1,5 @@
 package projeto;
 
-import java.util.Date;
-
 public class Ficha extends Paciente {
 
     protected int peso;
@@ -10,7 +8,7 @@ public class Ficha extends Paciente {
     protected String descricao;
     protected String tipoSG;
     protected String medicamento;
-    protected Date data;
+    protected String data;
     protected int idPac;
 
     public void setAltura(int altura) {
@@ -61,11 +59,11 @@ public class Ficha extends Paciente {
         return medicamento;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

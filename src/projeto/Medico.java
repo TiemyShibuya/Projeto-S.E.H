@@ -9,7 +9,7 @@ public class Medico {
     private String cpf;
     private String sexo;
     private int idade;
-    private Date dataNasc;
+    private String dataNasc;
     private String telefone;
     private String endereco;
     private String especialidade;
@@ -57,11 +57,11 @@ public class Medico {
         this.idade = idade;
     }
 
-    public Date getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 

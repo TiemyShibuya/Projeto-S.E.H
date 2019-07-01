@@ -36,8 +36,6 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         jFormattedTextFieldDataNasc = new javax.swing.JFormattedTextField();
         jFormattedTextFieldEnd = new javax.swing.JFormattedTextField();
         jFormattedTextFieldRG = new javax.swing.JFormattedTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabelPerfil = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
@@ -45,6 +43,7 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jPanelFundoSuperior = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -93,7 +92,11 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         getContentPane().add(jFormattedTextFieldTel);
         jFormattedTextFieldTel.setBounds(210, 290, 240, 30);
 
-        jFormattedTextFieldDataNasc.setText(" /  /    ");
+        try {
+            jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldDataNasc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         getContentPane().add(jFormattedTextFieldDataNasc);
         jFormattedTextFieldDataNasc.setBounds(210, 380, 240, 30);
@@ -101,16 +104,6 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         jFormattedTextFieldEnd.setBounds(210, 460, 300, 30);
         getContentPane().add(jFormattedTextFieldRG);
         jFormattedTextFieldRG.setBounds(530, 130, 200, 30);
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jCheckBox1.setText("Feminino");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(560, 210, 83, 27);
-
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jCheckBox2.setText("Masculino");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(560, 250, 100, 27);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 153));
         jPanel2.setLayout(null);
@@ -152,6 +145,8 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
 
         getContentPane().add(jPanelFundoSuperior);
         jPanelFundoSuperior.setBounds(0, 0, 790, 30);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(540, 220, 190, 30);
 
         setSize(new java.awt.Dimension(799, 611));
         setLocationRelativeTo(null);
@@ -161,12 +156,9 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonVoltar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNasc;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnd;
@@ -185,5 +177,6 @@ public class TelaPerfilPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelFundoSuperior;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

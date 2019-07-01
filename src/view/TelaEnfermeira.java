@@ -88,6 +88,7 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -146,6 +147,11 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         jToggleButtonPaciente.setBounds(260, 90, 60, 60);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rel.png"))); // NOI18N
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jToggleButton1);
         jToggleButton1.setBounds(580, 90, 60, 60);
 
@@ -202,6 +208,11 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(220, 50, 160, 22);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Fichas:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(580, 50, 60, 22);
+
         setSize(new java.awt.Dimension(794, 610));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -251,12 +262,18 @@ public class TelaEnfermeira extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jFormattedTextFieldNomeKeyPressed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        new TelaFichaPaciente(jFormattedTextFieldNome.getText()).setVisible(true);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMensagem;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JFormattedTextField jFormattedTextFieldNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelFotoEnfermeira;
     private javax.swing.JLabel jLabelNomeEnfermeira;
     private javax.swing.JPanel jPanel1;

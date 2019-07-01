@@ -1,7 +1,6 @@
 package view;
 
 import control.conexaoDB;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
     conexaoDB con = new conexaoDB();
     PreparedStatement pst = null;
+    PreparedStatement pst2 = null;
     ResultSet rs = null;
     String id;
     String user;
@@ -87,29 +87,61 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
     }
 
-    public void UpdatePerfil() throws SQLException, ClassNotFoundException {
-        String query = "update medico set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,especialidade=?,usuario=?,senha=? where idMed=?";
+    public boolean UpdateFuncionario(int aux) throws ClassNotFoundException {
+        String query;
+        if (aux == 1) {
+            query = "update medico set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,especialidade=?,usuario=?,senha=? where usuario = '" + user + "'";
+            try {
 
-        try {
+                pst = con.conn.prepareStatement(query);
 
-            pst = con.conn.prepareStatement(query);
-            pst.setString(1, jTextFieldNomeC.getText());
-            pst.setString(2, jFormattedTextFieldCpf.getText());
-            pst.setString(3, jTextFieldSexo.getText());
-            pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
-            pst.setDate(5, Date.valueOf(jFormattedTextFieldDt.getText()));
-            pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
-            pst.setString(7, jTextFieldEnd.getText());
-            pst.setString(8, jTextFieldESp.getText());
-            pst.setString(9, jTextFieldUser.getText());
-            pst.setString(10, jPasswordFieldSenha.getText());
-            pst.setInt(11, Integer.parseInt(id));
+                pst.setString(1, jTextFieldNomeC.getText());
+                pst.setString(2, jFormattedTextFieldCpf.getText());
+                pst.setString(3, jTextFieldSexo.getText());
+                pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
+                pst.setString(5, jFormattedTextFieldDt.getText());
+                pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
+                pst.setString(7, jTextFieldEnd.getText());
+                pst.setString(8, jTextFieldESp.getText());
+                pst.setString(9, jTextFieldUser.getText());
+                pst.setString(10, jPasswordFieldSenha.getText());
 
-            pst.executeUpdate();
+                pst.executeUpdate();
 
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!!", "Atualizado", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException error) {
+
+                JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if (aux == 2) {
+            query = "update enfermeira set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,cargo=?,usuario=?,senha=? where usuario = '" + user + "'";
+
+            try {
+
+                pst = con.conn.prepareStatement(query);
+
+                pst.setString(1, jTextFieldNomeC.getText());
+                pst.setString(2, jFormattedTextFieldCpf.getText());
+                pst.setString(3, jTextFieldSexo.getText());
+                pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
+                pst.setString(5, jFormattedTextFieldDt.getText());
+                pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
+                pst.setString(7, jTextFieldEnd.getText());
+                pst.setString(8, jTextFieldESp.getText());
+                pst.setString(9, jTextFieldUser.getText());
+                pst.setString(10, jPasswordFieldSenha.getText());
+
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!!", "Atualizado", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException error) {
+
+                JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
+        return false;
 
     }
 
@@ -308,14 +340,21 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+
+        boolean teste2 = false;
         try {
-            // TODO add your handling code here:
-            UpdatePerfil();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaPerfilFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            teste2 = UpdateFuncionario(1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaPerfilFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (teste2 == false) {
+            try {
+                teste2 = UpdateFuncionario(2);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPerfilFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed

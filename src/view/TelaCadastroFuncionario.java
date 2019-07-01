@@ -110,7 +110,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().add(jTextFieldNome);
-        jTextFieldNome.setBounds(220, 110, 130, 30);
+        jTextFieldNome.setBounds(220, 110, 170, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nome:");
@@ -125,7 +125,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         jLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel.setText("Sexo:");
         getContentPane().add(jLabel);
-        jLabel.setBounds(410, 100, 50, 40);
+        jLabel.setBounds(420, 100, 50, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Idade:");
@@ -214,7 +214,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(jLabel11);
         jLabel11.setBounds(200, 0, 500, 60);
         getContentPane().add(jTextFieldSexo);
-        jTextFieldSexo.setBounds(470, 100, 80, 30);
+        jTextFieldSexo.setBounds(490, 110, 60, 30);
 
         try {
             jFormattedTextFieldcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));

@@ -26,7 +26,7 @@ public class ControlMedico {
             pst.setString(2, med.getCpf());
             pst.setString(3, med.getSexo());
             pst.setInt(4, med.getIdade());
-            pst.setDate(5, (Date) med.getDataNasc());
+            pst.setString(5, med.getDataNasc());
             pst.setString(6, med.getTelefone());
             pst.setString(7, med.getEndereco());
             pst.setString(8, med.getEspecialidade());
@@ -55,7 +55,7 @@ public class ControlMedico {
             pst.setString(2, med.getCpf());
             pst.setString(3, med.getSexo());
             pst.setInt(4, med.getIdade());
-            pst.setDate(5, (Date) med.getDataNasc());
+            pst.setString(5, med.getDataNasc());
             pst.setString(6, med.getTelefone());
             pst.setString(7, med.getEndereco());
             pst.setString(8, med.getEspecialidade());

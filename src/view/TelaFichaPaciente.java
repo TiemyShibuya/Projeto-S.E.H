@@ -1,7 +1,6 @@
 package view;
 
 import control.conexaoDB;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
             pst.setString(4, jTextAreaDesc.getText());
             pst.setString(5, jTextFieldTS.getText());
             pst.setString(6, jTextFieldMed.getText());
-            pst.setDate(7, Date.valueOf(jFormattedTextFieldData.getText()));
+            pst.setString(7, jFormattedTextFieldData.getText());
 
             pst.executeQuery();
 
@@ -67,8 +66,9 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
         jLabelNome = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jFormattedTextFieldData = new javax.swing.JFormattedTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel12 = new javax.swing.JLabel();
+        jFormattedTextFieldData = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -128,7 +128,7 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Descrição:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(190, 310, 120, 22);
+        jLabel8.setBounds(190, 340, 120, 22);
         getContentPane().add(jTextFieldPeso);
         jTextFieldPeso.setBounds(260, 150, 100, 30);
         getContentPane().add(jTextFieldAlt);
@@ -138,25 +138,23 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
         getContentPane().add(jTextFieldTS);
         jTextFieldTS.setBounds(590, 200, 90, 30);
         getContentPane().add(jTextFieldMed);
-        jTextFieldMed.setBounds(340, 260, 140, 30);
+        jTextFieldMed.setBounds(310, 260, 140, 30);
 
         jTextAreaDesc.setColumns(20);
         jTextAreaDesc.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDesc);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(310, 320, 410, 150);
+        jScrollPane1.setBounds(290, 340, 410, 150);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Tipo de emergência:");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(220, 530, 180, 22);
         getContentPane().add(jTextFieldEm);
-        jTextFieldEm.setBounds(390, 530, 70, 30);
-
-        jLabelNome.setText("jLabel10");
+        jTextFieldEm.setBounds(390, 520, 70, 30);
         getContentPane().add(jLabelNome);
-        jLabelNome.setBounds(240, 100, 40, 14);
+        jLabelNome.setBounds(240, 110, 0, 0);
 
         jLabel10.setText("kg");
         getContentPane().add(jLabel10);
@@ -165,8 +163,6 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
         jLabel11.setText("cm");
         getContentPane().add(jLabel11);
         jLabel11.setBounds(380, 210, 40, 14);
-        getContentPane().add(jFormattedTextFieldData);
-        jFormattedTextFieldData.setBounds(490, 80, 150, 20);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         jToggleButton1.setText("Salvar");
@@ -178,7 +174,21 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
         getContentPane().add(jToggleButton1);
         jToggleButton1.setBounds(610, 543, 99, 30);
 
-        pack();
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Data:");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(190, 300, 60, 22);
+
+        try {
+            jFormattedTextFieldData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jFormattedTextFieldData);
+        jFormattedTextFieldData.setBounds(310, 300, 140, 30);
+
+        setSize(new java.awt.Dimension(761, 628));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -192,6 +202,7 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

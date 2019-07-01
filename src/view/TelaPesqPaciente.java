@@ -96,7 +96,7 @@ public class TelaPesqPaciente extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTableNomePac);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(110, 120, 550, 100);
+        jScrollPane2.setBounds(110, 120, 550, 90);
 
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/seta.png"))); // NOI18N
         jToggleButton2.setText("Voltar");
@@ -108,7 +108,8 @@ public class TelaPesqPaciente extends javax.swing.JFrame {
         getContentPane().add(jToggleButton2);
         jToggleButton2.setBounds(550, 320, 105, 33);
 
-        pack();
+        setSize(new java.awt.Dimension(689, 406));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

@@ -384,7 +384,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
 
     private void jButtonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPacienteActionPerformed
 
-        new TelaCadastroPaciente().setVisible(true);
+        new TelaPesqPaciente().setVisible(true);
         //this.dispose();
     }//GEN-LAST:event_jButtonPacienteActionPerformed
 

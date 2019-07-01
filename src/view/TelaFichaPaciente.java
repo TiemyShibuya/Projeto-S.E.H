@@ -15,24 +15,24 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
     public TelaFichaPaciente(String pac) {
         initComponents();
         jLabelNome.setText(pac);
+
     }
 
     public void PreencherFicha() {
-        //"select curdate()";
-        //"insert into ficha (date) values(curdate())";
-        String query = "select Paciente_idPac from paciente where date";
+
+        String query = "select Paciente_idPac from paciente where idPac=?";
         String query2 = "insert into ficha(Paciente_idPac,peso,altura,alergia,descricao,tipoSG,medicamento,date) values(?,?,?,?,?,?,?)";
         con.Connect();
         try {
             pst = con.conn.prepareStatement(query);
-
-            pst.setInt(1, Integer.parseInt(jTextFieldPeso.getText()));
-            pst.setInt(2, Integer.parseInt(jTextFieldAlt.getText()));
-            pst.setString(3, jTextFieldAler.getText());
-            pst.setString(4, jTextAreaDesc.getText());
-            pst.setString(5, jTextFieldTS.getText());
-            pst.setString(6, jTextFieldMed.getText());
-            pst.setString(7, jFormattedTextFieldData.getText());
+            //pst.setInt(1,);
+            pst.setInt(2, Integer.parseInt(jTextFieldPeso.getText()));
+            pst.setInt(3, Integer.parseInt(jTextFieldAlt.getText()));
+            pst.setString(4, jTextFieldAler.getText());
+            pst.setString(5, jTextAreaDesc.getText());
+            pst.setString(6, jTextFieldTS.getText());
+            pst.setString(7, jTextFieldMed.getText());
+            pst.setString(8, jFormattedTextFieldData.getText());
 
             pst.executeQuery();
 
@@ -192,7 +192,7 @@ public class TelaFichaPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+
         PreencherFicha();
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed

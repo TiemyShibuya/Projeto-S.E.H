@@ -1,7 +1,6 @@
 package view;
 
 import control.conexaoDB;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +28,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
         con.Connect();
 
         try {
-            System.out.println("try");
+            //System.out.println("try");
             pst = con.conn.prepareStatement(query);
             pst.setString(1, jTextFieldNome.getText());
             pst.setString(2, jTextFieldcpf.getText());

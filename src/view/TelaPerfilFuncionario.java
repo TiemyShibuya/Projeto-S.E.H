@@ -58,7 +58,8 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
                 }
 
             } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+
+                // JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
             }
         } else if (aux == 2) {
             query = "select * from enfermeira where usuario = '" + user + "'";
@@ -80,7 +81,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
                 }
 
             } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Falha na conexão", "Falha", JOptionPane.ERROR_MESSAGE);
             }
         }
         return false;
@@ -100,7 +101,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
                 pst.setString(3, jTextFieldSexo.getText());
                 pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
                 pst.setString(5, jFormattedTextFieldDt.getText());
-                pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
+                pst.setString(6, jFormattedTextFieldTel.getText());
                 pst.setString(7, jTextFieldEnd.getText());
                 pst.setString(8, jTextFieldESp.getText());
                 pst.setString(9, jTextFieldUser.getText());
@@ -112,7 +113,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
             } catch (SQLException error) {
 
-                JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
         } else if (aux == 2) {
             query = "update enfermeira set nome=?,cpf=?,sexo=?,idade=?,dataNasc=?,telefone=?,endereco=?,cargo=?,usuario=?,senha=? where usuario = '" + user + "'";
@@ -126,7 +127,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
                 pst.setString(3, jTextFieldSexo.getText());
                 pst.setInt(4, Integer.parseInt(jTextFieldIdade.getText()));
                 pst.setString(5, jFormattedTextFieldDt.getText());
-                pst.setInt(6, Integer.parseInt(jFormattedTextFieldTel.getText()));
+                pst.setString(6, jFormattedTextFieldTel.getText());
                 pst.setString(7, jTextFieldEnd.getText());
                 pst.setString(8, jTextFieldESp.getText());
                 pst.setString(9, jTextFieldUser.getText());
@@ -138,7 +139,7 @@ public class TelaPerfilFuncionario extends javax.swing.JFrame {
 
             } catch (SQLException error) {
 
-                JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Não foi possível atualizar!", "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         return false;
